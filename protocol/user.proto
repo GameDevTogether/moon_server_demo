@@ -1,0 +1,88 @@
+syntax = "proto3";
+option csharp_namespace = "NetMessage";
+import "common.proto";
+
+message S2CErrorCode
+{
+    int32 code = 1;//错误码
+}
+
+message C2SLogin
+{
+    string openid = 1;//openid
+}
+
+message S2CLogin
+{
+    bool ok = 1; //是否登录成功
+    int64 time = 2; //服务器当前时间ms
+    int64 timezone = 3; //服务器当前时区
+}
+
+//请求到道具列表
+message C2SItemList
+{
+
+}
+
+//同步道具列表
+message S2CItemList
+{
+    repeated ItemData itemlist = 1;//道具列表
+    repeated int32 equipedIds = 2; //已装备的id
+    repeated WeaponData weaponlist =3; //装备列表
+}
+
+//装备武器
+message C2SEquip
+{
+    int32 equipId = 1; //武器id  
+}
+
+//装备武器结果
+message S2CEquip
+{
+    bool ok = 1; //是否装备成功
+    int32 equipId = 2; //武器id  
+}
+
+//升级武器
+message C2SUpgradeWeapon
+{
+    int32 equipId = 1; //武器id  
+}
+
+
+//升级武器结果
+message S2CUpgradeWeapon
+{
+    int32 equipId = 1;
+    int32 level = 2;
+}
+
+//抽奖
+message C2SGacha
+{
+    int32 id =1; //宝箱id
+    int32 count = 2; //宝箱个数
+}
+
+//抽奖结果
+message S2CGacha
+{
+    repeated ItemData itemlist = 1;//道具列表
+}
+
+
+//购买礼包 (金币包,宝石包)
+message C2SPurchasePack
+{
+    int32 packId = 1;//礼包id
+}
+
+
+//购买礼包 (金币包,宝石包)结果
+message S2CPurchasePack
+{
+    repeated ItemData itemlist = 1;//道具列表
+}
