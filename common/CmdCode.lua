@@ -6,16 +6,17 @@ local M={
     C2SLogin = 1,
     S2CLogin = 2,
     S2CErrorCode = 3,
-    S2CItemList = 4,
-    C2SEquip = 5,
-    S2CEquip = 6,
-    C2SUpgradeWeapon = 7,
-    S2CUpgradeWeapon = 8,
-    C2SGacha = 9,
-    S2CGacha = 10,
-    C2SPurchasePack = 11,
-    S2CPurchasePack = 12,
-    S2CUserData = 13,
+    C2SEquip = 4,
+    S2CEquip = 5,
+    C2SUpgradeWeapon = 6,
+    S2CUpgradeWeapon = 7,
+    C2SGacha = 8,
+    S2CGacha = 9,
+    C2SPurchasePack = 10,
+    S2CPurchasePack = 11,
+    S2CUserData = 12,
+    C2SBag = 13,
+    S2CBag = 14,
 
 }
 
@@ -25,6 +26,7 @@ local forward = {
     C2SUpgradeWeapon = 'addr_user',
     C2SGacha = 'addr_user',
     C2SPurchasePack = 'addr_user',
+    C2SBag = 'addr_user',
 
 }
 

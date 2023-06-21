@@ -31,50 +31,56 @@ message S2CUserData
     int64 gem = 7;//宝石
     int64 gold = 8;//金币
     int32 levelId = 9;//当前章节ID
-    map<int32,ItemData> itemlist = 10;//道具列表
 
+    repeated ItemData itemlist = 10;//道具列表
+    repeated int32 equipedIdList = 11; //已装备的id
+    repeated WeaponData weaponlist =12; //装备列表
 }
 
+//请求背包数据
+message C2SBag
+{
+   
+}
 
-//同步道具列表
-message S2CItemList
+//同步背包数据
+message S2CBag
 {
     repeated ItemData itemlist = 1;//道具列表
-    repeated int32 equipedIds = 2; //已装备的id
-    repeated WeaponData weaponlist =3; //装备列表
+    repeated WeaponData weaponlist =2; //装备列表
 }
 
 //装备武器
 message C2SEquip
 {
-    int32 equipId = 1; //武器id  
+    int64 uid = 1; //武器uid  
 }
 
 //装备武器结果
 message S2CEquip
 {
     bool ok = 1; //是否装备成功
-    int32 equipId = 2; //武器id  
+    int64 uid = 2; //武器uid  
 }
 
 //升级武器
 message C2SUpgradeWeapon
 {
-    int32 equipId = 1; //武器id  
+    int64 uid = 1; //道具唯一uid  
 }
 
 
 //升级武器结果
 message S2CUpgradeWeapon
 {
-    int32 equipId = 1;
+    int64 uid = 1;
     int32 level = 2;
 }
 
 //抽奖
 message C2SGacha
 {
-    int32 id =1; //宝箱id
+    int32 chestId =1; //宝箱id
     int32 count = 2; //宝箱个数
 }
 
@@ -82,6 +88,7 @@ message C2SGacha
 message S2CGacha
 {
     repeated ItemData itemlist = 1;//道具列表
+    repeated WeaponData weaponlist =2; //装备列表
 }
 
 
@@ -95,5 +102,7 @@ message C2SPurchasePack
 //购买礼包 (金币包,宝石包)结果
 message S2CPurchasePack
 {
-    repeated ItemData itemlist = 1;//道具列表
+    int32 packId = 1;//礼包id
+    int64 gem = 2;//宝石
+    int64 gold = 3;//金币
 }

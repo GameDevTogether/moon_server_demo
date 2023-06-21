@@ -25,16 +25,16 @@
 
 
 ---@class ItemData
----@field public id integer @道具id
----@field public config integer @config id
+---@field public uid integer @道具id
 ---@field public count integer @道具数量
 
 
 ---@class WeaponData
----@field public id integer @武器id
----@field public config integer @config id
+---@field public uid integer @唯一id
+---@field public weaponId integer @武器id
 ---@field public level integer @等级
 ---@field public star integer @星级
+---@field public quailty integer @品质
 
 
 ---@class S2CErrorCode
@@ -61,40 +61,45 @@
 ---@field public gem integer @宝石
 ---@field public gold integer @金币
 ---@field public levelId integer @当前章节ID
----@field public itemlist table<integer, ItemData> @道具列表
-
-
----@class S2CItemList
 ---@field public itemlist ItemData[] @道具列表
----@field public equipedIds integer[] @已装备的id
+---@field public equipedIdList integer[] @已装备的id
+---@field public weaponlist WeaponData[] @装备列表
+
+
+---@class C2SBag
+
+
+---@class S2CBag
+---@field public itemlist ItemData[] @道具列表
 ---@field public weaponlist WeaponData[] @装备列表
 
 
 ---@class C2SEquip
----@field public equipId integer @武器id
+---@field public uid integer @武器uid
 
 
 ---@class S2CEquip
 ---@field public ok boolean @是否装备成功
----@field public equipId integer @武器id
+---@field public uid integer @武器uid
 
 
 ---@class C2SUpgradeWeapon
----@field public equipId integer @武器id
+---@field public uid integer @道具唯一uid
 
 
 ---@class S2CUpgradeWeapon
----@field public equipId integer
+---@field public uid integer
 ---@field public level integer
 
 
 ---@class C2SGacha
----@field public id integer @宝箱id
+---@field public chestId integer @宝箱id
 ---@field public count integer @宝箱个数
 
 
 ---@class S2CGacha
 ---@field public itemlist ItemData[] @道具列表
+---@field public weaponlist WeaponData[] @装备列表
 
 
 ---@class C2SPurchasePack
@@ -102,7 +107,9 @@
 
 
 ---@class S2CPurchasePack
----@field public itemlist ItemData[] @道具列表
+---@field public packId integer @礼包id
+---@field public gem integer @宝石
+---@field public gold integer @金币
 
 
 

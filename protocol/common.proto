@@ -5,18 +5,18 @@ option csharp_namespace = "NetMessage";
 //道具数据
 message ItemData
 {
-    int32 id = 1;//道具id
-    int32 config = 2; //config id 
-    int64 count =3;//道具数量
+    int64 uid = 1;//道具id
+    int32 count =2;//道具数量
 }
 
 //武器数据
 message WeaponData
 {
-    int32 id = 1; //武器id 
-    int32 config = 2; //config id 
+    int64 uid = 1; //唯一id 
+    int32 weaponId = 2; //武器id
     int32 level = 3;  //等级
     int32 star = 4; // 星级
+    int32 quailty = 5; //品质
 }
 
 
