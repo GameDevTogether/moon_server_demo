@@ -5,9 +5,11 @@ if _G["__init__"] then
         thread = 8,
         enable_stdout = (arg[3] ~= "hide"),
         logfile = string.format("log/hub-%s-%s.log", arg[1], os.date("%Y-%m-%d-%H-%M-%S")),
-        loglevel = arg[4] or "DEBUG",
+        loglevel =  "DEBUG",
     }
 end
+
+--arg[4] or
 
 -- Define lua module search dir, all services use same lua search path
 local path = table.concat({

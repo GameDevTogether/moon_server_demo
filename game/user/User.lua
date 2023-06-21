@@ -3,6 +3,9 @@ local common = require("common")
 local CmdCode = common.CmdCode
 local GameCfg = common.GameCfg
 local Database = common.Database
+local UserDataFn = require("game.module.UserData")
+
+
 
 ---@type user_context
 local context = ...
@@ -10,12 +13,12 @@ local scripts = context.scripts
 
 local state = { ---内存中的状态
     online = false,
-    ismatching = false,
     data_changed = false
 }
 
 ---@class User
 local User = {}
+
 function User.Load(req)
     local function fn()
         local data = scripts.UserModel.Get()
@@ -34,13 +37,10 @@ function User.Load(req)
             isnew = true
 
             ---create new user
-            data = {
-                openid = req.openid,
-                uid = req.uid,
-                name = req.openid,
-                level = 10,
-                score = 0
-            }
+            data = UserDataFn()
+            data.openid = req.openid
+            data.uid = req.uid
+            data.name = req.openid
         end
 
         scripts.UserModel.Create(data)
@@ -82,6 +82,14 @@ function User.Login(req)
     return scripts.UserModel.Get().openid
 end
 
+---登录成功,触发该函数
+---@param req any
+function User.LoginSuccess(req)
+    print(req.uid,"login success")
+    --同步玩家数据给服务器
+    User.C2SUserData()
+end
+
 function User.Logout()
     context.batch_invoke("Offline")
 end
@@ -106,11 +114,6 @@ function User.Offline()
 
     print(context.uid, "offline")
     state.online = false
-
-    if state.ismatching then
-        state.ismatching = false
-        moon.send("lua", context.addr_center, "Center.UnMatch", context.uid)
-    end
 end
 
 function User.OnHour()
@@ -139,43 +142,6 @@ function User.C2SPing(req)
     context.S2C(CmdCode.S2CPong, req)
 end
 
---请求匹配
-function User.C2SMatch()
-    if state.ismatching then
-        return
-    end
 
-    state.ismatching = true
-    --向匹配服务器请求
-    local ok, err = moon.call("lua", context.addr_center, "Center.Match", context.uid, moon.id)
-    if not ok then
-        state.ismatching = false
-        moon.error(err)
-        return
-    end
-    context.S2C(CmdCode.S2CMatch, { res = true })
-end
-
-function User.MatchSuccess(addr_room, roomid)
-    state.ismatching = false
-    context.addr_room = addr_room
-    state.roomid = roomid
-    context.S2C(CmdCode.S2CMatchSuccess, { res = true })
-end
-
---房间一局结束
-function User.GameOver(score)
-    print("GameOver, add score", score)
-    local data = scripts.UserModel.MutGet()
-    data.score = data.score + score
-    context.addr_room = 0
-    context.S2C(CmdCode.S2CGameOver, { score = score })
-end
-
-function User.AddScore(count)
-    local data = scripts.UserModel.MutGet()
-    data.score = data.score + count
-    return true
-end
 
 return User

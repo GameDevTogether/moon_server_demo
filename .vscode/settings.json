@@ -1,0 +1,10 @@
+{
+    "Lua.diagnostics.disable": [
+        "missing-return"
+    ],
+    "cmake.configureOnOpen": false,
+    "Lua.workspace.library": [
+        "./moon/lualib/",
+        "./moon/service/"
+    ]
+}

@@ -49,6 +49,7 @@ local function load_scripts(context, sname)
     end
 
     for name, file in pairs(scripts) do
+        print(name)
         local fn
         local content = moon.env(file)
         if content then

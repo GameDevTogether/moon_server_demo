@@ -1,4 +1,4 @@
--- require("LuaPanda").start("127.0.0.1", 8818)
+require("common.LuaPanda").start("127.0.0.1", 8818)
 local moon = require("moon")
 local seri = require("seri")
 local buffer = require("buffer")
@@ -47,13 +47,14 @@ local function forward(msg, msgname)
         moon.error("recv unknown message", msgname)
         return
     end
-    print(string.format("消息转发 [%s] --->%s",msgname,address))
+    print(string.format("msg direct [%s] --->%s",msgname,address))
     redirect(msg, address, PTYPE_C2S)
 end
 
 moon.raw_dispatch("C2S",function(msg)
     local buf = moon.decode(msg, "B")
     local msgname = id_to_name(bunpack(buf, "<H"))
+    print("user vm  dispacth  C2S ".. msgname)
     if not command[msgname] then
         wfront(buf, seri.packs(context.uid))
         forward(msg, msgname)

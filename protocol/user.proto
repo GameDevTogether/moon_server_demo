@@ -19,11 +19,22 @@ message S2CLogin
     int64 timezone = 3; //服务器当前时区
 }
 
-//请求到道具列表
-message C2SItemList
+//同步玩家数据
+message S2CUserData
 {
+    string openid = 1;//
+    int64 uid = 2;//玩家uid
+    string name = 3;//玩家名字
+    int32 level = 4;//玩家等级
+    int64 exp = 5;//当前经验
+    int64 logintime = 6;//玩家上线时间
+    int64 gem = 7;//宝石
+    int64 gold = 8;//金币
+    int32 levelId = 9;//当前章节ID
+    map<int32,ItemData> itemlist = 10;//道具列表
 
 }
+
 
 //同步道具列表
 message S2CItemList

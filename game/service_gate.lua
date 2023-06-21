@@ -67,6 +67,9 @@ end)
 moon.raw_dispatch("S2C",function(msg)
     local buf = moon.decode(msg, "B")
     local uid = seri.unpack_one(buf, true)
+
+
+    print("gate dispatch msg "..uid)
     if type(uid) == "number" then
         local c = context.uid_map[uid]
         if not c then

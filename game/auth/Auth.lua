@@ -63,7 +63,7 @@ local function doAuth(req)
             logouttime = moon.time(),
             online = false
         }
-
+        print_r(u)
         context.uid_map[req.uid] = u
     end
 
@@ -91,6 +91,7 @@ local function doAuth(req)
         uid = req.uid,
     }
     context.S2C(req.uid, CmdCode.S2CLogin, res)
+    moon.send("lua", addr_user, "User.LoginSuccess", req)
 end
 
 --- 踢出玩家

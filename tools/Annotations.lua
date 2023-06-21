@@ -18,10 +18,10 @@
 ---@field public level integer @玩家等级
 ---@field public exp integer @当前经验
 ---@field public logintime integer @玩家上线时间
----@field public diamond integer @宝石
+---@field public gem integer @宝石
 ---@field public gold integer @金币
----@field public chapterid integer @当前章节ID
----@field public itemlist table<integer, ItemData> @道具列表
+---@field public levelId integer @当前章节ID
+---@field public itemlist ItemData[] @道具列表
 
 
 ---@class ItemData
@@ -51,7 +51,17 @@
 ---@field public timezone integer @服务器当前时区
 
 
----@class C2SItemList
+---@class S2CUserData
+---@field public openid string @
+---@field public uid integer @玩家uid
+---@field public name string @玩家名字
+---@field public level integer @玩家等级
+---@field public exp integer @当前经验
+---@field public logintime integer @玩家上线时间
+---@field public gem integer @宝石
+---@field public gold integer @金币
+---@field public levelId integer @当前章节ID
+---@field public itemlist table<integer, ItemData> @道具列表
 
 
 ---@class S2CItemList
@@ -107,17 +117,17 @@
 ---@field Gate Gate
 
 
+---@class module_scripts
+---@field UserData UserData
+
+
 ---@class node_scripts
 ---@field Console Console
 
 
 ---@class user_scripts
----@field Hello Hello
----@field Item Item
----@field Shop Shop
 ---@field User User
 ---@field UserModel UserModel
----@field Weapon Weapon
 
 
 ---@class static_conf
