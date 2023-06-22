@@ -186,7 +186,7 @@ local function run(node_conf)
         moon.async(function()
             if server_ok then
                 assert(moon.call("lua", moon.queryservice("gate"), "Gate.Shutdown"))
-                assert(moon.call("lua", moon.queryservice("center"), "Center.Shutdown"))
+                -- assert(moon.call("lua", moon.queryservice("center"), "Center.Shutdown"))
                 assert(moon.call("lua", moon.queryservice("auth"), "Auth.Shutdown"))
                 moon.sleep(5000)
                 moon.raw_send("system", moon.queryservice("db_server"), "wait_save")

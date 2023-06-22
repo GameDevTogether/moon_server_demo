@@ -19,57 +19,6 @@ local state = { ---内存中的状态
 ---@class User
 local User = {}
 
-function User.Load(req)
-    local function fn()
-        local data = scripts.UserModel.Get()
-        if data then
-            return data
-        end
-
-        data = Database.loaduser(context.addr_db_user, req.uid)
-
-        local isnew = false
-        if not data then
-            if #req.openid == 0 or req.pull then
-                return
-            end
-
-            isnew = true
-
-            ---create new user
-            data = UserDataFn()
-            data.openid = req.openid
-            data.uid = req.uid
-            data.name = req.openid
-        end
-
-        scripts.UserModel.Create(data)
-
-        ---初始化自己数据
-        context.batch_invoke("Init")
-        ---初始化互相引用的数据
-        context.batch_invoke("Start")
-
-        if isnew then
-
-        end
-        return data
-    end
-
-    local ok, res = xpcall(fn, debug.traceback, req)
-    if not ok then
-        return ok, res
-    end
-
-    if not res then
-        local errmsg = string.format("user init failed, can not find user %d", req.uid)
-        moon.error(errmsg)
-        return false, errmsg
-    end
-    req.openid = res.openid
-    context.uid = res.uid
-    return true
-end
 
 function User.Login(req)
     if req.pull then --服务器主动拉起玩家

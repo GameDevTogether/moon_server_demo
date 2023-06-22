@@ -225,7 +225,7 @@ class ProtoGen(object):
 
 
 config = Config(
-    protoc_file = "protoc3.exe",
+    protoc_file = "protoc",
     csharp_protoc_file= "protogen/protogen.exe",
     proto_src_dir="../protocol/",
     ignore_file_list=["annotations"],

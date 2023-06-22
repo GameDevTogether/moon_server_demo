@@ -24,19 +24,6 @@
 ---@field public itemlist ItemData[] @道具列表
 
 
----@class ItemData
----@field public uid integer @道具id
----@field public count integer @道具数量
-
-
----@class WeaponData
----@field public uid integer @唯一id
----@field public weaponId integer @武器id
----@field public level integer @等级
----@field public star integer @星级
----@field public quailty integer @品质
-
-
 ---@class S2CErrorCode
 ---@field public code integer @错误码
 
@@ -112,6 +99,19 @@
 ---@field public gold integer @金币
 
 
+---@class ItemData
+---@field public uid integer @道具id
+---@field public count integer @道具数量
+
+
+---@class WeaponData
+---@field public uid integer @唯一id
+---@field public weaponId integer @武器id
+---@field public level integer @等级
+---@field public star integer @星级
+---@field public quailty integer @品质
+
+
 
 
 
@@ -120,24 +120,26 @@
 ---@field Auth Auth
 
 
----@class gate_scripts
----@field Gate Gate
-
-
 ---@class module_scripts
 ---@field UserData UserData
+
+
+---@class user_scripts
+---@field UserEntry UserEntry
+---@field User User
+---@field UserModel UserModel
+---@field Bag Bag
+
+
+---@class gate_scripts
+---@field Gate Gate
 
 
 ---@class node_scripts
 ---@field Console Console
 
 
----@class user_scripts
----@field User User
----@field UserModel UserModel
-
-
 ---@class static_conf
 ---@field constant constant
----@field example example_cfg[]
 ---@field item item_cfg[]
+---@field example example_cfg[]
