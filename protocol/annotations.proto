@@ -23,8 +23,8 @@ message UserData{
     int64 gem = 7;//宝石
     int64 gold = 8;//金币
     int32 levelId = 9;//当前章节ID
-    repeated ItemData itemlist = 10;//道具列表
 
+    BagData bag = 10; //背包数据
     //日常任务
 
     

@@ -33,7 +33,7 @@ local function doAuth(req)
             return "create user service failed!"
         end
 
-        local ok, err = moon.call("lua", addr_user, "Entry.Load", req)
+        local ok, err = moon.call("lua", addr_user, "UserEntry.Init", req)
         if not ok then
             moon.send("lua", context.addr_gate, "Gate.Kick", 0, req.fd)
             moon.kill(addr_user)

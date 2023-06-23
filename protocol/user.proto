@@ -31,10 +31,6 @@ message S2CUserData
     int64 gem = 7;//宝石
     int64 gold = 8;//金币
     int32 levelId = 9;//当前章节ID
-
-    repeated ItemData itemlist = 10;//道具列表
-    repeated int32 equipedIdList = 11; //已装备的id
-    repeated WeaponData weaponlist =12; //装备列表
 }
 
 //请求背包数据
@@ -46,8 +42,7 @@ message C2SBag
 //同步背包数据
 message S2CBag
 {
-    repeated ItemData itemlist = 1;//道具列表
-    repeated WeaponData weaponlist =2; //装备列表
+    BagData data = 1;
 }
 
 //装备武器

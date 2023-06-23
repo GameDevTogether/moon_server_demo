@@ -7,16 +7,16 @@ local M = {}
 local static
 
 function M.Load()
-    -- static = sharetable.queryall()
-    -- static.__index = static
-    -- setmetatable(M, static)
+    static = sharetable.queryall()
+    static.__index = static
+    setmetatable(M, static)
 end
 
 function M.Reload(names)
-    -- local res = sharetable.queryall(names)
-    -- for k,v in pairs(res) do
-    --     static[k] = v
-    -- end
+    local res = sharetable.queryall(names)
+    for k,v in pairs(res) do
+        static[k] = v
+    end
 end
 
 return M

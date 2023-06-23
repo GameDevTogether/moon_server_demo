@@ -3,8 +3,11 @@
 local ErrorCode = {
     None = 0,
     ServerInternalError = 1,
+    ---非法参数
     ParamInvalid = 2,
     ConfigError =3,
+
+    
 
     ---没有这个装备
     EquipNotFound = 101,

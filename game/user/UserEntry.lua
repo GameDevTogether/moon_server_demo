@@ -8,13 +8,13 @@ local UserDataFn = require("game.module.UserData")
 local context = ...
 local scripts = context.scripts
 
-
+---@class UserEntry
 local Entry = {}
 
 
 ---模块初始化函数
 ---@param req any
----@return boolean,(string|UserData) @模块初始化失败,失败信息
+---@return boolean,(string|UserData|nil) @模块初始化结果
 function Entry.Init(req)
 
     ---加载or创建玩家数据
@@ -70,3 +70,6 @@ function Entry.Init(req)
     context.uid = res.uid
     return true,res
 end
+
+
+return Entry

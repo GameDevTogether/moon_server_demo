@@ -21,7 +21,7 @@
 ---@field public gem integer @宝石
 ---@field public gold integer @金币
 ---@field public levelId integer @当前章节ID
----@field public itemlist ItemData[] @道具列表
+---@field public bag BagData @背包数据
 
 
 ---@class S2CErrorCode
@@ -48,17 +48,13 @@
 ---@field public gem integer @宝石
 ---@field public gold integer @金币
 ---@field public levelId integer @当前章节ID
----@field public itemlist ItemData[] @道具列表
----@field public equipedIdList integer[] @已装备的id
----@field public weaponlist WeaponData[] @装备列表
 
 
 ---@class C2SBag
 
 
 ---@class S2CBag
----@field public itemlist ItemData[] @道具列表
----@field public weaponlist WeaponData[] @装备列表
+---@field public data BagData
 
 
 ---@class C2SEquip
@@ -112,6 +108,12 @@
 ---@field public quailty integer @品质
 
 
+---@class BagData
+---@field public itemMap table<integer, ItemData> @道具列表
+---@field public equipedIdList integer[] @已装备的id
+---@field public weaponMap table<integer, WeaponData> @装备列表
+
+
 
 
 
@@ -140,6 +142,10 @@
 
 
 ---@class static_conf
----@field constant constant
----@field item item_cfg[]
----@field example example_cfg[]
+---@field weaponconfigs weaponconfigs_cfg[]
+---@field monsterconfigs monsterconfigs_cfg[]
+---@field battleleveupawardconfigs battleleveupawardconfigs_cfg[]
+---@field itemqualityconfigs itemqualityconfigs_cfg[]
+---@field gameitemconfigs gameitemconfigs_cfg[]
+---@field shopitemconfigs shopitemconfigs_cfg[]
+---@field levelconfigs levelconfigs_cfg[]

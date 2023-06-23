@@ -19,6 +19,12 @@ message WeaponData
     int32 quailty = 5; //品质
 }
 
+message BagData
+{
+    map<int64,ItemData> itemMap = 1;//道具列表
+    repeated int64 equipedIdList = 2; //已装备的id
+    map<int64,WeaponData> weaponMap =3; //装备列表
+}
 
 enum Type 
 {
