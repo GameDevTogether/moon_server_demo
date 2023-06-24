@@ -1,1 +1,1 @@
-start cmd /k ..\moon\moon.exe login.lua 1
+start cmd /k ..\moon\moon.exe test.lua 1

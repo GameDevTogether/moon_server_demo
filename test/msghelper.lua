@@ -41,7 +41,7 @@ end
 
 function msghelper.randopenid()
 
-    return "test_"..random.rand_range(1,100000000)
+    return "test_1"--..random.rand_range(1,100000000)
 end
 
 return msghelper

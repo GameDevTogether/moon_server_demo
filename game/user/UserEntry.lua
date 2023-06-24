@@ -1,8 +1,8 @@
 local moon = require("moon")
 local common = require("common")
 local Database = common.Database
-local UserDataFn = require("game.module.UserData")
-
+local UserData = require("game.module.UserData")
+local GameCfg = common.GameCfg
 
 ---@type user_context
 local context = ...
@@ -15,7 +15,9 @@ local Entry = {}
 ---模块初始化函数
 ---@param req any
 ---@return boolean,(string|UserData|nil) @模块初始化结果
-function Entry.Init(req)
+function Entry.StartModule(req)
+
+    GameCfg.Load()
 
     ---加载or创建玩家数据
     ---@return UserData|nil
@@ -36,7 +38,7 @@ function Entry.Init(req)
             isnew = true
 
             ---create new user
-            data = UserDataFn()
+            data = UserData.Create()
             data.openid = req.openid
             data.uid = req.uid
             data.name = req.openid
@@ -66,6 +68,7 @@ function Entry.Init(req)
         moon.error(errmsg)
         return false, errmsg
     end
+    print_r(req)
     req.openid = res.openid
     context.uid = res.uid
     return true,res

@@ -5,8 +5,8 @@ option csharp_namespace = "NetMessage";
 //道具数据
 message ItemData
 {
-    int64 uid = 1;//道具id
-    int32 count =2;//道具数量
+    int32 id = 1;//道具id
+    int32 count = 2;//道具数量
 }
 
 //武器数据
@@ -24,6 +24,7 @@ message BagData
     map<int64,ItemData> itemMap = 1;//道具列表
     repeated int64 equipedIdList = 2; //已装备的id
     map<int64,WeaponData> weaponMap =3; //装备列表
+    int32 maxCanEquipCount = 4; //最大可装备数量
 }
 
 enum Type 

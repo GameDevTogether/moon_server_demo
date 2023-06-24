@@ -49,7 +49,7 @@ local function load_scripts(context, sname)
     end
 
     for name, file in pairs(scripts) do
-        print(name)
+        print(string.format("start load script [%s]",name))
         local fn
         local content = moon.env(file)
         if content then
@@ -58,7 +58,7 @@ local function load_scripts(context, sname)
             fn = assert(loadfile(file))
         end
         local t = fn(context)
-        assert(type(t) == "table")
+        assert(type(t) == "table",string.format("load file[%s] failed",name))
 
         context.scripts[name] = t
         hotfix.register(file, fn, t)
@@ -66,6 +66,7 @@ local function load_scripts(context, sname)
         for k, v in pairs(t) do
             if type(v) == "function" then
                 if string.sub(k, 1, 3) == "C2S" then
+                    print(string.format("register msg handler [%s]",k))
                     command[k] = v
                 else
                     command[name .. "." .. k] = v
@@ -165,6 +166,7 @@ local function do_client_command(context, cmd, uid, req)
     local fn = command[cmd]
     if fn then
         local ok, res = xpcall(fn, traceback, uid, req)
+        
         if not ok then
             moon.error(res)
             context.S2C(uid, CmdCode.S2CErrorCode, { code = 1 }) -- server internal error

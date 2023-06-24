@@ -1,2 +1,2 @@
 #!/bin/bash
-../moon/moon login.lua 1
+../moon/moon test.lua 1

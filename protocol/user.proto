@@ -58,6 +58,19 @@ message S2CEquip
     int64 uid = 2; //武器uid  
 }
 
+//卸载武器
+message C2SUnEquip
+{
+    int64 uid = 1; //武器uid  
+}
+
+//装备武器结果
+message S2CUnEquip
+{
+    bool ok = 1; //是否装备成功
+    int64 uid = 2; //武器uid  
+}
+
 //升级武器
 message C2SUpgradeWeapon
 {
@@ -82,8 +95,7 @@ message C2SGacha
 //抽奖结果
 message S2CGacha
 {
-    repeated ItemData itemlist = 1;//道具列表
-    repeated WeaponData weaponlist =2; //装备列表
+    repeated WeaponData weaponlist =1; //装备列表
 }
 
 

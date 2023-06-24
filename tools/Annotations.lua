@@ -11,6 +11,15 @@
 ---@field public online boolean @@是否在线
 
 
+---@class GachaItem
+---@field public id integer @宝箱id
+---@field public count integer @抽奖次数
+
+
+---@class GachaData
+---@field public itemMap table<integer, GachaItem> @所有宝箱抽奖数据
+
+
 ---@class UserData
 ---@field public openid string @
 ---@field public uid integer @玩家uid
@@ -22,6 +31,7 @@
 ---@field public gold integer @金币
 ---@field public levelId integer @当前章节ID
 ---@field public bag BagData @背包数据
+---@field public gacha GachaData @抽奖数据
 
 
 ---@class S2CErrorCode
@@ -66,6 +76,15 @@
 ---@field public uid integer @武器uid
 
 
+---@class C2SUnEquip
+---@field public uid integer @武器uid
+
+
+---@class S2CUnEquip
+---@field public ok boolean @是否装备成功
+---@field public uid integer @武器uid
+
+
 ---@class C2SUpgradeWeapon
 ---@field public uid integer @道具唯一uid
 
@@ -81,7 +100,6 @@
 
 
 ---@class S2CGacha
----@field public itemlist ItemData[] @道具列表
 ---@field public weaponlist WeaponData[] @装备列表
 
 
@@ -96,7 +114,7 @@
 
 
 ---@class ItemData
----@field public uid integer @道具id
+---@field public id integer @道具id
 ---@field public count integer @道具数量
 
 
@@ -112,6 +130,7 @@
 ---@field public itemMap table<integer, ItemData> @道具列表
 ---@field public equipedIdList integer[] @已装备的id
 ---@field public weaponMap table<integer, WeaponData> @装备列表
+---@field public maxCanEquipCount integer @最大可装备数量
 
 
 
@@ -128,7 +147,9 @@
 
 ---@class user_scripts
 ---@field UserEntry UserEntry
+---@field Shop Shop
 ---@field User User
+---@field Weapon Weapon
 ---@field UserModel UserModel
 ---@field Bag Bag
 
@@ -142,10 +163,11 @@
 
 
 ---@class static_conf
+---@field shopcurrencypackconfigs shopcurrencypackconfigs_cfg[]
+---@field gachaconfigs gachaconfigs_cfg[]
 ---@field weaponconfigs weaponconfigs_cfg[]
 ---@field monsterconfigs monsterconfigs_cfg[]
 ---@field battleleveupawardconfigs battleleveupawardconfigs_cfg[]
 ---@field itemqualityconfigs itemqualityconfigs_cfg[]
 ---@field gameitemconfigs gameitemconfigs_cfg[]
----@field shopitemconfigs shopitemconfigs_cfg[]
 ---@field levelconfigs levelconfigs_cfg[]

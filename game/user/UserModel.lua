@@ -1,12 +1,15 @@
 local moon = require("moon")
 local common = require("common")
 local Database = common.Database
-local CurrencyType = common.Constant.CurrencyType
+local CurrencyType = common.Enums.CurrencyType
+local ErrorCode = common.Enums.ErrorCode
 
 ----DB Model 标准定义格式
 
 ---@type user_context
 local context = ...
+local scripts = context.scripts
+
 
 ---定时存储标记
 local dirty = false
@@ -20,7 +23,6 @@ local UserModel = {}
 
 
 function UserModel.Create(data)
-
     if DBData then
         return DBData
     end
@@ -67,45 +69,46 @@ function UserModel.MutGet()
 end
 
 ---检查游戏货币是否足够
----@param currencyType CurrencyType
+---@param currencyType integer
 ---@param value integer
----@return boolean @货币是否足够
-function UserModel.CheckCurrencyEnyouch(currencyType,value)
-    assert(currencyType ~= CurrencyType.Money,"param currencyType must be gold/gem")
+---@return integer|nil @错误吗|nil
+function UserModel.CheckCurrencyEnough(currencyType, value)
+    assert(currencyType ~= CurrencyType.Money, "param currencyType must be gold/gem")
 
     local data = UserModel.Get()
 
-    local userCurrencyValue = data.gold
-    if currencyType == CurrencyType.Gem then
-        userCurrencyValue = data.gem
+    if currencyType == CurrencyType.Gold then
+        if data.gold < value then
+            return ErrorCode.GoldNotEnough
+        end
+    elseif currencyType == CurrencyType.Gem then
+        if data.gem < value then
+            return ErrorCode.GemNotEnough
+        end
     end
-
-    return userCurrencyValue>= value
 end
 
 ---检查游戏货币是否足够
----@param currencyType CurrencyType
+---@param currencyType integer
 ---@param value integer
----@param integer @错误码
-function UserModel.AddCurrency(currencyType,value)
-    if UserModel.CheckCurrencyEnyouch(currencyType,value) then
-
+---@return integer|nil @错误码|nil
+function UserModel.AddCurrency(currencyType, value)
+    if value < 0 then
+        local errorCode = UserModel.CheckCurrencyEnough(currencyType, value)
+        if errorCode ~= ErrorCode.None then
+            return errorCode
+        end
     end
 
-
-    assert(currencyType ~= CurrencyType.Money,"param currencyType must be gold/gem")
+    assert(currencyType ~= CurrencyType.Money, "param currencyType must be gold/gem")
 
     local data = UserModel.MutGet()
 
     if currencyType == CurrencyType.Gem then
-        data.gem = data.gem+ value
-
-        
-    else if currencyType == CurrencyType.Gold then
-
+        data.gem = data.gem + value
+    elseif currencyType == CurrencyType.Gold then
+        data.gold = data.gold + value
     end
-
-    return userCurrencyValue>= value
 end
 
 return UserModel

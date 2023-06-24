@@ -17,6 +17,8 @@ local M={
     S2CUserData = 12,
     C2SBag = 13,
     S2CBag = 14,
+    C2SUnEquip = 15,
+    S2CUnEquip = 16,
 
 }
 
@@ -27,6 +29,7 @@ local forward = {
     C2SGacha = 'addr_user',
     C2SPurchasePack = 'addr_user',
     C2SBag = 'addr_user',
+    C2SUnEquip = 'addr_user',
 
 }
 

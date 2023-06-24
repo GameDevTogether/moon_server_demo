@@ -54,7 +54,7 @@ end
 moon.raw_dispatch("C2S",function(msg)
     local buf = moon.decode(msg, "B")
     local msgname = id_to_name(bunpack(buf, "<H"))
-    print("user vm  dispacth  C2S ".. msgname)
+    print("user vm  dispacth  ".. msgname)
     if not command[msgname] then
         wfront(buf, seri.packs(context.uid))
         forward(msg, msgname)
@@ -63,6 +63,7 @@ moon.raw_dispatch("C2S",function(msg)
         local fn = command[cmd]
         moon.async(function()
             local ok, res = xpcall(fn, debug.traceback, data)
+            -- print("执行命令结果 ",ok,res)
             if not ok then
                 moon.error(res)
                 context.S2C(CmdCode.S2CErrorCode,{code = 1}) --server internal error

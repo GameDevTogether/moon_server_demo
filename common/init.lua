@@ -1,5 +1,9 @@
 ---降低require多个文件查找消耗,注意内部避免递归require
 
+--把excel定义的enum也引用过来
+local enums = require("static.common.Types").enums
+
+
 return {
     vector2 = require("common.vector2"),
     setup = require("common.setup"),
@@ -12,5 +16,5 @@ return {
     GameDef = require("common.GameDef"),
     ErrorCode = require("common.ErrorCode"),
     CreateTable = require("common.CreateTable"),
-    Constant = require "common.Constant",
+    Enums = enums,
 }

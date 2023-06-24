@@ -49,6 +49,21 @@ local enums =
      ---@field public Gem integer
      ---@field public Money integer
     ['CurrencyType'] = {   Gold=1,  Gem=2,  Money=3,  };
+    ---@class ErrorCode
+     ---@field public None integer
+     ---@field public ParamInvalid integer
+     ---@field public ConfigError integer
+     ---@field public GoldNotEnough integer
+     ---@field public GemNotEnough integer
+     ---@field public RechargeFailed integer
+     ---@field public AlreadyEquipped integer
+     ---@field public AlreadyUnEquipped integer
+     ---@field public WeaponMaxLevel integer
+     ---@field public MaxEquipWeaponCount integer
+     ---@field public NeedOneWeapnEquipped integer
+     ---@field public WithoutWeapon integer
+     ---@field public ItemNotEnough integer
+    ['ErrorCode'] = {   None=0,  ParamInvalid=1,  ConfigError=2,  GoldNotEnough=3,  GemNotEnough=4,  RechargeFailed=5,  AlreadyEquipped=6,  AlreadyUnEquipped=7,  WeaponMaxLevel=8,  MaxEquipWeaponCount=9,  NeedOneWeapnEquipped=10,  WithoutWeapon=11,  ItemNotEnough=12,  };
 }
 
 local tables =
@@ -65,7 +80,9 @@ local tables =
 
     { name='ItemQualityConfigs', file='itemqualityconfigs', mode='map', index='id', value_type='ItemQualityConfig' },
 
-    { name='ShopItemConfigs', file='shopitemconfigs', mode='map', index='id', value_type='ShopItemConfig' },
+    { name='ShopCurrencyPackConfigs', file='shopcurrencypackconfigs', mode='map', index='id', value_type='ShopCurrencyPackConfig' },
+
+    { name='GachaConfigs', file='gachaconfigs', mode='map', index='id', value_type='GachaConfig' },
 
 }
 

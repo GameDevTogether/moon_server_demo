@@ -13,6 +13,17 @@ message AuthUser{
     bool online = 5;//@是否在线
 }
 
+//宝箱抽奖数据
+message GachaItem{
+    int32 id = 1; //宝箱id
+    int32 count = 2; //抽奖次数
+}
+
+//抽奖数据
+message GachaData{
+    map<int32,GachaItem> itemMap = 1; //所有宝箱抽奖数据 
+}
+
 message UserData{
     string openid = 1;//
     int64 uid = 2;//玩家uid
@@ -26,6 +37,8 @@ message UserData{
 
     BagData bag = 10; //背包数据
     //日常任务
-
+    GachaData gacha = 11; //抽奖数据
+    //
     
 }
+

@@ -35,6 +35,7 @@ function User.LoginSuccess(req)
     print(req.uid,"login success")
     --同步玩家数据给服务器
     User.C2SUserData()
+    
 end
 
 function User.Logout()
@@ -81,6 +82,10 @@ function User.Exit()
 end
 
 function User.C2SUserData()
+    User.S2CUserData()
+end
+
+function User.S2CUserData()
     context.S2C(CmdCode.S2CUserData, scripts.UserModel.Get())
 end
 
