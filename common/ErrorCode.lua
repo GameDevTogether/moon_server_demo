@@ -1,5 +1,5 @@
 
----@enum ErrorCode
+---@enum EErrorCode
 local ErrorCode = {
     None = 0,
     ServerInternalError = 1,
@@ -44,6 +44,13 @@ local ErrorCode = {
 
     ---奖励已经领取过
     DailyTaskReceived = 701,
+
+    ---邮件状态一致，重复发送
+    MailStateFit =1000,
+    MailNoID =1001,
+    MailNoRewards =1002,
+    MailHadRewards =1003,
+    MailNoDelete =1004,
 }
 
 return ErrorCode

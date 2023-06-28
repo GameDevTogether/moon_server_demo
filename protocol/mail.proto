@@ -1,0 +1,81 @@
+syntax = "proto3";
+option csharp_namespace = "NetMessage";
+import "common.proto";
+
+//同步 邮件数据
+message S2CUpdateMail
+{
+    MailData mail = 1;//邮件
+}
+
+//请求 邮件数据
+message C2SMailList
+{
+   
+}
+
+//返回 邮件数据
+message S2CMailList
+{
+    repeated MailData maillist = 1;//邮件列表
+}
+
+//请求变更邮件状态，不需要同步回给客户端
+message C2SMailState
+{
+    int64 msgid = 1;//邮件唯一id
+}
+
+message S2CMailState
+{
+
+}
+
+//请求 领取邮件附件
+message C2SMailRecive
+{
+    int64 msgid = 1;//邮件唯一id
+}
+
+//返回 领取邮件附件
+message S2CMailRecive
+{
+    int64 msgid = 1;//邮件唯一id
+}
+
+//请求 删除邮件
+message C2SMailDelete
+{
+    int64 msgid = 1;//邮件唯一id
+}
+
+//返回 删除邮件
+message S2CMailDelete
+{
+    int64 msgid = 1;//邮件唯一id
+}
+
+//请求 一键领取邮件附件
+message C2SMailRecives
+{
+  
+}
+
+//返回 一键领取邮件附件
+message S2CMailRecives
+{
+    repeated int64 msgids = 1;//领取的ids
+}
+
+//请求 一键删除邮件
+message C2SMailDeletes
+{
+   
+}
+
+//返回 一键删除邮件
+message S2CMailDeletes
+{
+    repeated int64 msgids = 1;//删除的ids
+}
+

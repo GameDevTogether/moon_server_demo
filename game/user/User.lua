@@ -93,7 +93,12 @@ function User.C2SPing(req)
     req.stime = moon.time()
     context.S2C(CmdCode.S2CPong, req)
 end
-
-
+---接收gm命令
+---@param req C2SGM
+function User.C2SGM(req)
+    if req.id == 1 then
+        scripts.Mail.TestMail()
+    end
+end
 
 return User

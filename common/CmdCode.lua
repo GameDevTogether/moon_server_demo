@@ -19,6 +19,21 @@ local M={
     S2CBag = 14,
     C2SUnEquip = 15,
     S2CUnEquip = 16,
+    S2CUpdateMail = 17,
+    C2SMailList = 18,
+    S2CMailList = 19,
+    C2SMailState = 20,
+    S2CMailState = 21,
+    C2SMailRecive = 22,
+    S2CMailRecive = 23,
+    C2SMailDelete = 24,
+    S2CMailDelete = 25,
+    C2SMailRecives = 26,
+    S2CMailRecives = 27,
+    C2SMailDeletes = 28,
+    S2CMailDeletes = 29,
+    C2SGM = 30,
+    S2CGM = 31,
 
 }
 
@@ -30,6 +45,13 @@ local forward = {
     C2SPurchasePack = 'addr_user',
     C2SBag = 'addr_user',
     C2SUnEquip = 'addr_user',
+    C2SMailList = 'addr_mail',
+    C2SMailState = 'addr_mail',
+    C2SMailRecive = 'addr_mail',
+    C2SMailDelete = 'addr_mail',
+    C2SMailRecives = 'addr_mail',
+    C2SMailDeletes = 'addr_mail',
+    C2SGM = 'addr_user',
 
 }
 

@@ -224,6 +224,9 @@ class ProtoGen(object):
         #     fobj.write(csharp_cmdcode_template % (charp_cmdcode_content))
 
 
+import platform
+system = platform.system()
+
 config = Config(
     protoc_file = "protoc",
     csharp_protoc_file= "protogen/protogen.exe",
@@ -235,6 +238,15 @@ config = Config(
     # csharp_cmd_file="../../BallAction/Assets/Proto/CmdCode.cs",
     cmdcode_out_file="../Common/CmdCode.lua"
 )
+
+if system == 'Windows':
+    config.protoc_file = "protoc3.exe"
+elif system == 'Linux':
+    print('Linux')
+elif system == 'Darwin':
+    print('MacOS')
+else:
+    print('Unknown Operating System')
 
 try:
     proto_gen = ProtoGen(config)

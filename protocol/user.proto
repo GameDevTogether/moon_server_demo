@@ -113,3 +113,16 @@ message S2CPurchasePack
     int64 gem = 2;//宝石
     int64 gold = 3;//金币
 }
+
+//gm 命令
+message C2SGM
+{
+    int32 id = 1;//gm 命令id
+    string jsonParams = 2;//gm 其他参数
+}
+
+//gm 命令
+message S2CGM
+{
+
+}

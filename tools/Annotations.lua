@@ -32,6 +32,83 @@
 ---@field public levelId integer @当前章节ID
 ---@field public bag BagData @背包数据
 ---@field public gacha GachaData @抽奖数据
+---@field public mails MailData[] @邮件数据
+
+
+---@class ItemData
+---@field public id integer @道具id
+---@field public count integer @道具数量
+
+
+---@class WeaponData
+---@field public uid integer @唯一id
+---@field public weaponId integer @武器id
+---@field public level integer @等级
+---@field public star integer @星级
+---@field public quailty integer @品质
+
+
+---@class BagData
+---@field public itemMap table<integer, ItemData> @道具列表
+---@field public equipedIdList integer[] @已装备的id
+---@field public weaponMap table<integer, WeaponData> @装备列表
+---@field public maxCanEquipCount integer @最大可装备数量
+
+
+---@class MailData
+---@field public msgid integer @邮件唯一id
+---@field public id string @邮件配置id
+---@field public state integer @邮件状态，1、未读，2、已读未领取，3、已读已领取
+---@field public jsonparams string @动态的内容,客户端自己解析
+---@field public itemlist ItemData[] @动态实际奖励
+
+
+---@class S2CUpdateMail
+---@field public mail MailData @邮件
+
+
+---@class C2SMailList
+
+
+---@class S2CMailList
+---@field public maillist MailData[] @邮件列表
+
+
+---@class C2SMailState
+---@field public msgid integer @邮件唯一id
+
+
+---@class S2CMailState
+
+
+---@class C2SMailRecive
+---@field public msgid integer @邮件唯一id
+
+
+---@class S2CMailRecive
+---@field public msgid integer @邮件唯一id
+
+
+---@class C2SMailDelete
+---@field public msgid integer @邮件唯一id
+
+
+---@class S2CMailDelete
+---@field public msgid integer @邮件唯一id
+
+
+---@class C2SMailRecives
+
+
+---@class S2CMailRecives
+---@field public msgids integer[] @领取的ids
+
+
+---@class C2SMailDeletes
+
+
+---@class S2CMailDeletes
+---@field public msgids integer[] @删除的ids
 
 
 ---@class S2CErrorCode
@@ -113,24 +190,12 @@
 ---@field public gold integer @金币
 
 
----@class ItemData
----@field public id integer @道具id
----@field public count integer @道具数量
+---@class C2SGM
+---@field public id integer @gm 命令id
+---@field public jsonParams string @gm 其他参数
 
 
----@class WeaponData
----@field public uid integer @唯一id
----@field public weaponId integer @武器id
----@field public level integer @等级
----@field public star integer @星级
----@field public quailty integer @品质
-
-
----@class BagData
----@field public itemMap table<integer, ItemData> @道具列表
----@field public equipedIdList integer[] @已装备的id
----@field public weaponMap table<integer, WeaponData> @装备列表
----@field public maxCanEquipCount integer @最大可装备数量
+---@class S2CGM
 
 
 
@@ -141,33 +206,34 @@
 ---@field Auth Auth
 
 
----@class module_scripts
----@field UserData UserData
-
-
----@class user_scripts
----@field UserEntry UserEntry
----@field Shop Shop
----@field User User
----@field Weapon Weapon
----@field UserModel UserModel
----@field Bag Bag
-
-
 ---@class gate_scripts
 ---@field Gate Gate
+
+
+---@class module_scripts
+---@field UserData UserData
 
 
 ---@class node_scripts
 ---@field Console Console
 
 
+---@class user_scripts
+---@field Bag Bag
+---@field Mail Mail
+---@field Shop Shop
+---@field User User
+---@field UserEntry UserEntry
+---@field UserModel UserModel
+---@field Weapon Weapon
+
+
 ---@class static_conf
----@field shopcurrencypackconfigs shopcurrencypackconfigs_cfg[]
----@field gachaconfigs gachaconfigs_cfg[]
----@field weaponconfigs weaponconfigs_cfg[]
----@field monsterconfigs monsterconfigs_cfg[]
 ---@field battleleveupawardconfigs battleleveupawardconfigs_cfg[]
----@field itemqualityconfigs itemqualityconfigs_cfg[]
+---@field gachaconfigs gachaconfigs_cfg[]
 ---@field gameitemconfigs gameitemconfigs_cfg[]
+---@field itemqualityconfigs itemqualityconfigs_cfg[]
 ---@field levelconfigs levelconfigs_cfg[]
+---@field monsterconfigs monsterconfigs_cfg[]
+---@field shopcurrencypackconfigs shopcurrencypackconfigs_cfg[]
+---@field weaponconfigs weaponconfigs_cfg[]

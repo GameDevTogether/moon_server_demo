@@ -33,3 +33,11 @@ enum Type
     HOME = 1;
     WORK = 2;
 }
+
+message MailData{
+    int64 msgid =1;//邮件唯一id
+    string id = 2;//邮件配置id
+    int32 state = 3;//邮件状态，1、未读，2、已读未领取，3、已读已领取
+    string jsonparams = 4;//动态的内容,客户端自己解析
+    repeated ItemData itemlist = 5;//动态实际奖励
+}

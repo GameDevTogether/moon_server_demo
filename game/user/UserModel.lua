@@ -68,6 +68,10 @@ function UserModel.MutGet()
     return DBData
 end
 
+function UserModel.SetDirty()
+    dirty = true
+end
+
 ---检查游戏货币是否足够
 ---@param currencyType integer
 ---@param value integer
