@@ -41,12 +41,10 @@ end
 ---@param send_list table
 ---@return integer @错误码
 function Bag.AddItem(id, count, immediately)
-    local UserModel = scripts.UserModel
     local item = scripts.UserModel.Get().bag.itemMap[id]
     if not item then
         ---@type ItemData
         item = { count = 0, uid = id }
-        local UserModel = scripts.UserModel
         scripts.UserModel.MutGet().bag.itemMap[id] = item
     end
     item.id = id
@@ -61,7 +59,6 @@ end
 ---@param immediately boolean
 function Bag.SyncPlayer(item, immediately)
     if immediately then
-        local UserModel = scripts.UserModel
         context.S2C(CmdCode.S2CBag, { data = scripts.UserModel.Get().bag })
     end
 end
@@ -70,7 +67,6 @@ function Bag.Cost(id, count, source, send_list)
     if count <= 0 then
         return ErrorCode.ParamInvalid
     end
-    local UserModel = scripts.UserModel
     local item = scripts.UserModel.Get().bag.itemMap[id]
     if not item or item.count < count then
         return ErrorCode.ItemNotEnough
@@ -81,9 +77,9 @@ function Bag.Cost(id, count, source, send_list)
 end
 
 function Bag.Costlist(list, source)
+    local userData = scripts.UserModel.Get()
     for _, v in ipairs(list) do
-        local UserModel = scripts.UserModel
-        local item = scripts.UserModel.Get().bag.itemMap[v[1]]
+        local item = userData.bag.itemMap[v[1]]
         if not item or item.count < v[2] then
             return ErrorCode.ItemNotEnough
         end
@@ -114,14 +110,13 @@ function Bag.AddWeaponList(list)
         weaponMap[value.uid] = value
     end
 
-    context.S2C(CmdCode.C2SBag, { data = scripts.UserModel.Get().bag })
+    context.S2C(CmdCode.C2SBag, { data = userData.bag })
 end
 
 ---获得武器
 ---@param uid integer @道具id
 ---@return WeaponData
 function Bag.GetWeapon(uid)
-    local UserModel = scripts.UserModel
     return scripts.UserModel.Get().bag.weaponMap[uid]
 end
 
@@ -129,7 +124,6 @@ end
 ---@param uid integer @道具id
 ---@return ItemData
 function Bag.GetItem(uid)
-    local UserModel = scripts.UserModel
     return scripts.UserModel.Get().bag.itemMap[uid]
 end
 
@@ -137,7 +131,6 @@ end
 ---@param uid integer @道具id
 ---@return boolean
 function Bag.Equiped(uid)
-    local UserModel = scripts.UserModel
     return table.contains(scripts.UserModel.Get().bag.equipedIdList, uid)
 end
 
@@ -159,11 +152,11 @@ function Bag.EquipWeapon(uid)
     end
 
     local UserModel = scripts.UserModel
-    local num = table.count(scripts.UserModel.Get().bag.equipedIdList)
-
+    local userData = UserModel.Get()
+    local num = table.count(userData.bag.equipedIdList)
     --检查装备数量是否到达上限
-    local UserModel = scripts.UserModel
-    if num >= scripts.UserModel.Get().bag.maxCanEquipCount then
+    
+    if num >= userData.bag.maxCanEquipCount then
         return ErrorCode.MaxEquipWeaponCount
     end
 

@@ -1,7 +1,7 @@
 ---降低require多个文件查找消耗,注意内部避免递归require
 
 --把excel定义的enum也引用过来
-local enums = require("static.common.Types").enums
+local enums = require("common.Types").enums
 
 
 return {

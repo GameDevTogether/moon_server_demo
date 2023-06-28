@@ -71,9 +71,11 @@ function Shop.Gacha(id, count)
         count = 11
     end
 
+    local UserModel = scripts.UserModel
+
     ---扣除金钱
     local currency = config.currencyNum * count
-    local errorCode = scripts.UserModel.AddCurrency(config.CurrencyType, -currency)
+    local errorCode = UserModel.AddCurrency(config.CurrencyType, -currency)
     if errorCode then
         return errorCode, nil
     end
@@ -88,13 +90,13 @@ function Shop.Gacha(id, count)
     end
 
 
-
+    local userDataRW = UserModel.MutGet()
     local weaponList = {}
     for i = 1, count do
         local weaponData = Shop.GacheOnce(quailties, probabilities, config.awardItem)
 
         --增加抽奖计数
-        local itemMap = scripts.UserModel.MutGet().gacha.itemMap
+        local itemMap = userDataRW.gacha.itemMap
         if not itemMap[id] then
             itemMap[id] = UserData.CreateGachaItem()
             itemMap[id].id = id
