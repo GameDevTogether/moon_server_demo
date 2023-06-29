@@ -26,22 +26,6 @@ local function get_map_size(m)
 end
 local enums =
 {
-    ---@class ItemQuality
-     ---@field public White integer
-     ---@field public Green integer
-     ---@field public Blue integer
-     ---@field public Purple integer
-     ---@field public Gold integer
-    ['ItemQuality'] = {   White=1,  Green=2,  Blue=3,  Purple=4,  Gold=5,  };
-    ---@class ItemType
-     ---@field public Weapon integer
-     ---@field public Currency integer
-    ['ItemType'] = {   Weapon=1,  Currency=2,  };
-    ---@class CurrencyType
-     ---@field public Gold integer
-     ---@field public Gem integer
-     ---@field public Cash integer
-    ['CurrencyType'] = {   Gold=1,  Gem=2,  Cash=3,  };
     ---@class ErrorCode
      ---@field public None integer
      ---@field public ParamInvalid integer
@@ -61,6 +45,22 @@ local enums =
      ---@field public MailHadRewards integer
      ---@field public MailNoDelete integer
     ['ErrorCode'] = {   None=0,  ParamInvalid=1,  ConfigError=2,  GoldNotEnough=3,  GemNotEnough=4,  RechargeFailed=5,  AlreadyEquipped=6,  AlreadyUnEquipped=7,  WeaponMaxLevel=8,  MaxEquipWeaponCount=9,  NeedOneWeapnEquipped=10,  WithoutWeapon=11,  MailStateFit=12,  MailNoID=13,  MailNoRewards=14,  MailHadRewards=15,  MailNoDelete=16,  };
+    ---@class ItemQuality
+     ---@field public White integer
+     ---@field public Green integer
+     ---@field public Blue integer
+     ---@field public Purple integer
+     ---@field public Gold integer
+    ['ItemQuality'] = {   White=1,  Green=2,  Blue=3,  Purple=4,  Gold=5,  };
+    ---@class ItemType
+     ---@field public Weapon integer
+     ---@field public Currency integer
+    ['ItemType'] = {   Weapon=1,  Currency=2,  };
+    ---@class CurrencyType
+     ---@field public Gold integer
+     ---@field public Gem integer
+     ---@field public Cash integer
+    ['CurrencyType'] = {   Gold=1,  Gem=2,  Cash=3,  };
 }
 
 local tables =
@@ -72,6 +72,8 @@ local tables =
     { name='ShopCurrencyPackConfigs', file='shopcurrencypackconfigs', mode='map', index='id', value_type='ShopCurrencyPackConfig' },
 
     { name='GachaConfigs', file='gachaconfigs', mode='map', index='id', value_type='GachaConfig' },
+
+    { name='CodeGifts', file='codegifts', mode='map', index='code', value_type='CodeGift' },
 
 }
 

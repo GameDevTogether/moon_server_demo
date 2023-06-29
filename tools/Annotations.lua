@@ -206,6 +206,11 @@
 ---@field Auth Auth
 
 
+---@class center_scripts
+---@field CodeGift CodeGift
+---@field empty empty
+
+
 ---@class gate_scripts
 ---@field Gate Gate
 
@@ -229,11 +234,8 @@
 
 
 ---@class static_conf
----@field battleleveupawardconfigs battleleveupawardconfigs_cfg[]
+---@field codegifts codegifts_cfg[]
 ---@field gachaconfigs gachaconfigs_cfg[]
 ---@field gameitemconfigs gameitemconfigs_cfg[]
----@field itemqualityconfigs itemqualityconfigs_cfg[]
----@field levelconfigs levelconfigs_cfg[]
----@field monsterconfigs monsterconfigs_cfg[]
 ---@field shopcurrencypackconfigs shopcurrencypackconfigs_cfg[]
 ---@field weaponconfigs weaponconfigs_cfg[]

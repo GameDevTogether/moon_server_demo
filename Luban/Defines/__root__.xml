@@ -1,6 +1,6 @@
 <root>
 
-	<topmodule name="BattleZerg.Config"/>
+	<topmodule name="Config"/>
 
 	<patch name="cn"/>
 	<patch name="en"/>

@@ -1,0 +1,31 @@
+<root>
+    <enum name="ErrorCode" comment="错误码">
+        <var name="None" comment="无" />
+        <var name="ParamInvalid" comment="参数非法" />
+        <var name="ConfigError" comment="配置错误" />
+        <var name="GoldNotEnough" comment="金币不足" />
+        <var name="GemNotEnough" comment="宝石不足" />
+        <var name="RechargeFailed" comment="充值失败" />
+
+        <!-- 武器 -->
+        <var name="AlreadyEquipped" comment="已装备" />
+        <var name="AlreadyUnEquipped" comment="已卸载" />
+        <var name="WeaponMaxLevel" comment="武器已到最大等级" />
+        <var name="MaxEquipWeaponCount" comment="武器装备超过最大数量" />
+        <var name="NeedOneWeapnEquipped" comment="至少需要装备一个武器" />
+        <var name="WithoutWeapon" comment="背包不存在这个武器" />
+
+        <!-- 邮件 -->
+        <var name="MailStateFit" comment="邮件状态已读" />
+        <var name="MailNoID" comment="找不到该邮件" />
+        <var name="MailNoRewards" comment="没有可领取邮件" />
+        <var name="MailHadRewards" comment="邮件已被领取" />
+        <var name="MailNoDelete" comment="没有可删除邮件" />
+    </enum>
+</root>
+
+
+
+
+
+
