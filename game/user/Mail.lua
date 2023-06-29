@@ -6,7 +6,7 @@ local common = require("common")
 local UserData = require("game.module.UserData")
 local CmdCode = common.CmdCode
 local GameCfg = common.GameCfg
-local ErrorCode = common.ErrorCode
+local ErrorCode = common.Enums.ErrorCode
 local CurrencyType = common.Enums.CurrencyType
 
 ---@type user_context
