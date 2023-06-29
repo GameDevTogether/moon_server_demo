@@ -15,20 +15,20 @@ local scripts = context.scripts
 --------------------------------------------------------------------------------
 
 ---@class Mail
-local t = {}
+local Mail = {}
 
-function t.Init()
+function Mail.Init()
     context.addr_gate = moon.queryservice("gate")
     context.addr_auth = moon.queryservice("auth")
     context.addr_db_user = moon.queryservice("db_user")
     return true
 end
 
-function t.Start(data)
+function Mail.Start(data)
 
 end
 
-function t.FindMail(uid,msgid)
+function Mail.FindMail(uid,msgid)
     local userModel = context.call_user(uid,"UserModel.Get")
     local list = userModel.mails
     for k, value in ipairs(list) do
@@ -39,7 +39,7 @@ function t.FindMail(uid,msgid)
     return nil
 end
 
-function t.TestMail(uid)
+function Mail.TestMail(uid)
     ---@type MailData
     local mail  = {}
     mail.msgid = uuid.next()
@@ -54,13 +54,13 @@ function t.TestMail(uid)
         },}
     mail.state = 1
     mail.jsonparams = "test"
-    t.S2CUpdateMail(uid,{mail = mail})
+    Mail.S2CUpdateMail(uid,{mail = mail})
 end
 
 
 ---同步 邮件数据
 ---@param data S2CUpdateMail 邮件内容
-function t.S2CUpdateMail(uid,data)
+function Mail.S2CUpdateMail(uid,data)
     local getlist = context.call_user(uid,"UserModel.Get")
     local list = getlist.mails or {}
     table.insert(list,data.mail)
@@ -69,7 +69,7 @@ function t.S2CUpdateMail(uid,data)
 end
 
 ---请求 邮件数据
-function t.C2SMailList(uid)
+function Mail.C2SMailList(uid)
     local userModel = context.call_user(uid,"UserModel.Get")
     local list = userModel.mails or {}
     context.S2C(uid,CmdCode.S2CMailList,{maillist = list})
@@ -77,8 +77,8 @@ end
 
 ---请求变更邮件状态
 ---@param req C2SMailState
-function t.C2SMailState(uid,req)
-    local key = t.FindMail(uid,req.msgid)
+function Mail.C2SMailState(uid,req)
+    local key = Mail.FindMail(uid,req.msgid)
     if not key then return ErrorCode.MailNoID end
     local userModel = context.call_user(uid,"UserModel.Get")
     local list = userModel.mails
@@ -92,8 +92,8 @@ end
 
 ---请求 领取邮件附件
 ---@param req C2SMailRecive
-function t.C2SMailRecive(uid,req)
-    local key = t.FindMail(uid,req.msgid)
+function Mail.C2SMailRecive(uid,req)
+    local key = Mail.FindMail(uid,req.msgid)
     if not key then return ErrorCode.MailNoID end
     local userModel = context.call_user(uid,"UserModel.Get")
     local list = userModel.mails
@@ -107,8 +107,8 @@ end
 
 ---请求 删除邮件
 ---@param req C2SMailDelete
-function t.C2SMailDelete(uid,req)
-    local key = t.FindMail(uid,req.msgid)
+function Mail.C2SMailDelete(uid,req)
+    local key = Mail.FindMail(uid,req.msgid)
     if not key then return ErrorCode.MailNoID end
     local userModel = context.call_user(uid,"UserModel.Get")
     local list = userModel.mails
@@ -122,7 +122,7 @@ function t.C2SMailDelete(uid,req)
 end
 
 ---请求 一键领取邮件附件
-function t.C2SMailRecives(uid)
+function Mail.C2SMailRecives(uid)
     local userModel = context.call_user(uid,"UserModel.Get")
     local list = userModel.mails
     local len = #list
@@ -143,7 +143,7 @@ function t.C2SMailRecives(uid)
 end
 
 ---请求 一键删除邮件
-function t.C2SMailDeletes(uid)
+function Mail.C2SMailDeletes(uid)
     local userModel = context.call_user(uid,"UserModel.Get")
     local list = userModel.mails
     local len = #list
@@ -163,9 +163,9 @@ function t.C2SMailDeletes(uid)
     context.S2C(uid,CmdCode.C2SMailDeletes,{msgids = ids})
 end
 
-function t.Shutdown()
+function Mail.Shutdown()
     moon.quit()
     return true
 end
 
-return t
+return Mail
