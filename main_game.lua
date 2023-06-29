@@ -91,12 +91,12 @@ local function run(node_conf)
             port = gate_port,
             threadid = 3,
         },
-        -- {
-        --     unique = true,
-        --     name = "center",
-        --     file = "game/service_center.lua",
-        --     threadid = 4,
-        -- },
+        {
+            unique = true,
+            name = "center",
+            file = "game/service_center.lua",
+            threadid = 4,
+        },
         {
             unique = true,
             name = "cluster",
