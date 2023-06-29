@@ -23,7 +23,6 @@ function UserData.Create()
         gacha = {
             itemMap = {}
         },
-        mails = {},
     }
 end
 

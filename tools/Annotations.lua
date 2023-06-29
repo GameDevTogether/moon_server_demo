@@ -32,7 +32,6 @@
 ---@field public levelId integer @当前章节ID
 ---@field public bag BagData @背包数据
 ---@field public gacha GachaData @抽奖数据
----@field public mails MailData[] @邮件数据
 
 
 ---@class ItemData
@@ -202,6 +201,9 @@
 ---@field public code string @礼包码
 
 
+---@class S2CExchangeGift
+
+
 
 
 
@@ -220,7 +222,6 @@
 
 ---@class mail_scripts
 ---@field Mail Mail
----@field MailModel MailModel
 
 
 ---@class module_scripts
