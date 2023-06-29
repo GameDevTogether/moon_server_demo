@@ -7,29 +7,30 @@ local UserData = require("game.module.UserData")
 local CmdCode = common.CmdCode
 local GameCfg = common.GameCfg
 local ErrorCode = common.Enums.ErrorCode
-local CurrencyType = common.Enums.CurrencyType
 
----@type user_context
+---@type mail_context
 local context = ...
 local scripts = context.scripts
-
-
 
 --------------------------------------------------------------------------------
 
 ---@class Mail
-local t = {}
+local Mail = {}
 
-function t.Init()
+function Mail.Init()
+    context.addr_gate = moon.queryservice("gate")
+    context.addr_auth = moon.queryservice("auth")
+    context.addr_db_user = moon.queryservice("db_user")
+    return true
+end
+
+function Mail.Start(data)
 
 end
 
-function t.Start()
-
-end
-
-function t.FindMail(msgid)
-    local list = scripts.UserModel.Get().mails
+function Mail.FindMail(uid,msgid)
+    local userModel = context.call_user(uid,"UserModel.Get")
+    local list = userModel.mails
     for k, value in ipairs(list) do
         if msgid == value.msgid then
             return k
@@ -38,7 +39,7 @@ function t.FindMail(msgid)
     return nil
 end
 
-function t.TestMail()
+function Mail.TestMail(uid)
     ---@type MailData
     local mail  = {}
     mail.msgid = uuid.next()
@@ -53,69 +54,77 @@ function t.TestMail()
         },}
     mail.state = 1
     mail.jsonparams = "test"
-    t.S2CUpdateMail({mail = mail})
+    Mail.S2CUpdateMail(uid,{mail = mail})
 end
 
 
 ---同步 邮件数据
 ---@param data S2CUpdateMail 邮件内容
-function t.S2CUpdateMail(data)
-    local getlist = scripts.UserModel.MutGet()
+function Mail.S2CUpdateMail(uid,data)
+    local getlist = context.call_user(uid,"UserModel.Get")
     local list = getlist.mails or {}
     table.insert(list,data.mail)
-    getlist.mails = list
-    context.S2C(CmdCode.S2CUpdateMail,data)
+    context.call_user(uid,"UserModel.PushData","mails",list)
+    context.S2C(uid,CmdCode.S2CUpdateMail,data)
 end
 
 ---请求 邮件数据
-function t.C2SMailList()
-    local list = scripts.UserModel.Get().mails or {}
-    context.S2C(CmdCode.S2CMailList,{maillist = list})
+function Mail.C2SMailList(uid)
+    local userModel = context.call_user(uid,"UserModel.Get")
+    local list = userModel.mails or {}
+    context.S2C(uid,CmdCode.S2CMailList,{maillist = list})
 end
 
 ---请求变更邮件状态
 ---@param req C2SMailState
-function t.C2SMailState(req)
-    local key = t.FindMail(req.msgid)
+function Mail.C2SMailState(uid,req)
+    local key = Mail.FindMail(uid,req.msgid)
     if not key then return ErrorCode.MailNoID end
-    local list = scripts.UserModel.MutGet().mails
+    local userModel = context.call_user(uid,"UserModel.Get")
+    local list = userModel.mails
     local data = list[key]
     if data.state ~= 1 then
         return ErrorCode.MailStateFit
     end
     data.state = #data.itemlist == 0 and 3 or 2
+    context.call_user(uid,"UserModel.PushData","mails",list)
 end
 
 ---请求 领取邮件附件
 ---@param req C2SMailRecive
-function t.C2SMailRecive(req)
-    local key = t.FindMail(req.msgid)
+function Mail.C2SMailRecive(uid,req)
+    local key = Mail.FindMail(uid,req.msgid)
     if not key then return ErrorCode.MailNoID end
-    local list = scripts.UserModel.MutGet().mails
+    local userModel = context.call_user(uid,"UserModel.Get")
+    local list = userModel.mails
     local data = list[key]
     if #data.itemlist == 0 then return ErrorCode.MailNoRewards end
     ---todo 发送道具奖励 
     data.state = 3
-    context.S2C(CmdCode.S2CMailRecive,{msgid = req.msgid})
+    context.call_user(uid,"UserModel.PushData","mails",list)
+    context.S2C(uid,CmdCode.S2CMailRecive,{msgid = req.msgid})
 end
 
 ---请求 删除邮件
 ---@param req C2SMailDelete
-function t.C2SMailDelete(req)
-    local key = t.FindMail(req.msgid)
+function Mail.C2SMailDelete(uid,req)
+    local key = Mail.FindMail(uid,req.msgid)
     if not key then return ErrorCode.MailNoID end
-    local list = scripts.UserModel.MutGet().mails
+    local userModel = context.call_user(uid,"UserModel.Get")
+    local list = userModel.mails
     local data = list[key]
     if #data.itemlist>0 and data.state~= 3 then --有附件未领取不允许删除
         return ErrorCode.MailHadRewards
     end
     table.remove(list,key)
-    context.S2C(CmdCode.C2SMailDelete,{msgid = req.msgid})
+    context.call_user(uid,"UserModel.PushData","mails",list)
+    context.S2C(uid,CmdCode.C2SMailDelete,{msgid = req.msgid})
 end
 
 ---请求 一键领取邮件附件
-function t.C2SMailRecives()
-    local list = scripts.UserModel.Get().mails
+function Mail.C2SMailRecives(uid)
+    local userModel = context.call_user(uid,"UserModel.Get")
+    local list = userModel.mails
     local len = #list
     if len == 0 then return ErrorCode.MailNoRewards end
     local ids = {}
@@ -129,13 +138,14 @@ function t.C2SMailRecives()
     if #ids==0 then
         return ErrorCode.MailNoRewards
     end
-    scripts.UserModel.SetDirty()
-    context.S2C(CmdCode.C2SMailRecives,{msgids = ids})
+    context.call_user(uid,"UserModel.PushData","mails",list)
+    context.S2C(uid,CmdCode.C2SMailRecives,{msgids = ids})
 end
 
 ---请求 一键删除邮件
-function t.C2SMailDeletes()
-    local list = scripts.UserModel.Get().mails
+function Mail.C2SMailDeletes(uid)
+    local userModel = context.call_user(uid,"UserModel.Get")
+    local list = userModel.mails
     local len = #list
     if len == 0 then return ErrorCode.MailNoDelete end
     local ids = {}
@@ -149,8 +159,13 @@ function t.C2SMailDeletes()
     if #ids==0 then
         return ErrorCode.MailNoDelete
     end
-    scripts.UserModel.SetDirty()
-    context.S2C(CmdCode.C2SMailDeletes,{msgids = ids})
+    context.call_user(uid,"UserModel.PushData","mails",list)
+    context.S2C(uid,CmdCode.C2SMailDeletes,{msgids = ids})
 end
 
-return t
+function Mail.Shutdown()
+    moon.quit()
+    return true
+end
+
+return Mail

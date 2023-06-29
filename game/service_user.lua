@@ -31,7 +31,8 @@ local context = {
     addr_gate = 0,
     addr_db_user = 0,
     addr_center = 0,
-    addr_auth = 0
+    addr_auth = 0,
+    addr_mail = 0,
 }
 
 local command = setup(context, "user")
@@ -78,6 +79,7 @@ context.addr_gate = moon.queryservice("gate")
 context.addr_db_user = moon.queryservice("db_user")
 
 context.addr_auth = moon.queryservice("auth")
+context.addr_mail = moon.queryservice("mail")
 
 context.S2C = function(cmd_code, mtable)
     moon.raw_send('S2C', context.addr_gate, protocol.encode(context.uid, cmd_code, mtable))

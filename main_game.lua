@@ -99,12 +99,12 @@ local function run(node_conf)
             port = gate_port,
             threadid = 3,
         },
-        {
-            unique = true,
-            name = "center",
-            file = "game/service_center.lua",
-            threadid = 4,
-        },
+        -- {
+        --     unique = true,
+        --     name = "center",
+        --     file = "game/service_center.lua",
+        --     threadid = 4,
+        -- },
         {
             unique = true,
             name = "cluster",
@@ -118,6 +118,12 @@ local function run(node_conf)
             name = "node",
             file = "game/service_node.lua",
             threadid = 6,
+        },
+        {
+            unique = true,
+            name = "mail",
+            file = "game/service_mail.lua",
+            threadid = 8,
         },
         {
             unique = true,
@@ -159,6 +165,7 @@ local function run(node_conf)
         -- assert(moon.call("lua", moon.queryservice("center"), "Init"))
         assert(moon.call("lua", moon.queryservice("gate"), "Init"))
         assert(moon.call("lua", moon.queryservice("node"), "Init"))
+        assert(moon.call("lua", moon.queryservice("mail"), "Init"))
 
         ---加载完数据后 开始接受网络连接
         -- assert(moon.call("lua", moon.queryservice("cluster"), "Listen"))
@@ -195,6 +202,7 @@ local function run(node_conf)
             if server_ok then
                 assert(moon.call("lua", moon.queryservice("gate"), "Gate.Shutdown"))
                 -- assert(moon.call("lua", moon.queryservice("center"), "Center.Shutdown"))
+                assert(moon.call("lua", moon.queryservice("mail"), "Mail.Shutdown"))
                 assert(moon.call("lua", moon.queryservice("auth"), "Auth.Shutdown"))
                 moon.sleep(5000)
                 moon.raw_send("system", moon.queryservice("db_server"), "wait_save")
