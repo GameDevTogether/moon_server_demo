@@ -147,17 +147,14 @@ clientsimulator.start(function(fd)
                 else
                     print("no delete")
                 end
-               
+            elseif input == "get" then
+                msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
+                ok,listdata = msghelper.read(fd)
+                print_r(listdata)
             elseif input == "deletes"  then
                 msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailDeletes,{}))
                 local ok,data = msghelper.read(fd)
                 print_r(data)
-                if ok then
-                    msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
-                    ok,listdata = msghelper.read(fd)
-                    print_r(listdata)
-                end
-                
             elseif input == "reward"  then
                 local id = 0
                 for _,v in pairs(listdata.maillist) do
@@ -171,7 +168,6 @@ clientsimulator.start(function(fd)
                     msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailRecive,{msgid = id}))
                     local ok,data = msghelper.read(fd)
                     print_r(data)
-                    moon.sleep(100)
                 else
                     print("no reward")
                 end
@@ -180,11 +176,6 @@ clientsimulator.start(function(fd)
                 msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailRecives,{}))
                 local ok,data = msghelper.read(fd)
                 print_r(data)
-                if ok then
-                    msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
-                    ok,listdata = msghelper.read(fd)
-                    print_r(listdata)
-                end
             elseif input == "read"  then
                 local id = 0
                 for _,v in pairs(listdata.maillist) do

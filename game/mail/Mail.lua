@@ -84,7 +84,8 @@ function Mail.C2SMailState(uid,req)
         return ErrorCode.MailStateFit
     end
     data.state = #data.itemlist == 0 and 3 or 2
-    context.call_user(uid,"UserModel.SetDirty")
+    -- context.call_user(uid,"UserModel.SetDirty")
+    context.call_user(uid,"UserModel.PushData","mails",list)
 end
 
 ---请求 领取邮件附件
@@ -97,7 +98,8 @@ function Mail.C2SMailRecive(uid,req)
     if #data.itemlist == 0 then return ErrorCode.MailNoRewards end
     ---todo 发送道具奖励 
     data.state = 3
-    context.call_user(uid,"UserModel.SetDirty")
+    -- context.call_user(uid,"UserModel.SetDirty")
+    context.call_user(uid,"UserModel.PushData","mails",list)
     context.S2C(uid,CmdCode.S2CMailRecive,{msgid = req.msgid})
 end
 
@@ -112,7 +114,8 @@ function Mail.C2SMailDelete(uid,req)
         return ErrorCode.MailHadRewards
     end
     table.remove(list,key)
-    context.call_user(uid,"UserModel.SetDirty")
+    -- context.call_user(uid,"UserModel.SetDirty")
+    context.call_user(uid,"UserModel.PushData","mails",list)
     context.S2C(uid,CmdCode.C2SMailDelete,{msgid = req.msgid})
 end
 
@@ -132,7 +135,8 @@ function Mail.C2SMailRecives(uid)
     if #ids==0 then
         return ErrorCode.MailNoRewards
     end
-    context.call_user(uid,"UserModel.SetDirty")
+    -- context.call_user(uid,"UserModel.SetDirty")
+    context.call_user(uid,"UserModel.PushData","mails",list)
     context.S2C(uid,CmdCode.C2SMailRecives,{msgids = ids})
 end
 
@@ -152,7 +156,8 @@ function Mail.C2SMailDeletes(uid)
     if #ids==0 then
         return ErrorCode.MailNoDelete
     end
-    context.call_user(uid,"UserModel.SetDirty")
+    -- context.call_user(uid,"UserModel.SetDirty")
+    context.call_user(uid,"UserModel.PushData","mails",list)
     context.S2C(uid,CmdCode.C2SMailDeletes,{msgids = ids})
 end
 

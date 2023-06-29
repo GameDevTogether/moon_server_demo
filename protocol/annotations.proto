@@ -38,5 +38,10 @@ message UserData{
     BagData bag = 10; //背包数据
     //日常任务
     GachaData gacha = 11; //抽奖数据
+    repeated MailData mails = 12;//邮件数据
+}
+
+message UserAllData{
+    UserData userdata = 1;// 玩家用户数据，登录下发
 }
 

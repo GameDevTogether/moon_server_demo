@@ -32,6 +32,11 @@
 ---@field public levelId integer @当前章节ID
 ---@field public bag BagData @背包数据
 ---@field public gacha GachaData @抽奖数据
+---@field public mails MailData[] @邮件数据
+
+
+---@class UserAllData
+---@field public userdata UserData @玩家用户数据，登录下发
 
 
 ---@class ItemData

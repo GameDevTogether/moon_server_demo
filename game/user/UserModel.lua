@@ -14,14 +14,6 @@ local scripts = context.scripts
 ---定时存储标记
 local dirty = false
 
----所有玩家数据 包括其他数据 手动写
----@class UserAllData
----@field public userdata UserData 用户数据
----@field public mails MailData[] @邮件数据
-
----@type UserAllData
-local DBUserData = {}
-
 ---@type UserData
 local DBData
 
@@ -36,7 +28,6 @@ function UserModel.Create(data)
     end
 
     DBData = data
-    DBUserData.userdata = data
 
     ---定义自动存储
     moon.async(function()
@@ -60,7 +51,7 @@ function UserModel.Save(checkDirty)
     if checkDirty and not dirty then
         return
     end
-    Database.saveuser(context.addr_db_user, DBData.uid, DBUserData)
+    Database.saveuser(context.addr_db_user, DBData.uid, DBData)
     dirty = false
 end
 
@@ -83,17 +74,17 @@ end
 
 function UserModel.PushData(key,data)
     dirty = true
-    DBUserData[key] = data
+    DBData[key] = data
     return true
 end
 
 function UserModel.GetData(key)
-    return DBUserData[key]
+    return DBData[key]
 end
 
 function UserModel.MutGetData(key)
     dirty = true
-    return DBUserData[key]
+    return DBData[key]
 end
 
 ---检查游戏货币是否足够
