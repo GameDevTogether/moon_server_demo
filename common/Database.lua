@@ -95,6 +95,19 @@ end
 function _M.savecodegift(addr_db,code,count)
     redis_hsend( addr_db, "hset", "codegift", code,count)
 end
+
+function _M.loadusermails(addr_db,userid)
+    local res, err = redis_hcall(userid, addr_db, "hget", "mails", userid)
+    if res == false then
+        error("loadmails failed:" .. tostring(err))
+    end
+
+    return res
+end
+
+function _M.saveusermails(addr_db,userid,data)
+    redis_hsend(userid, addr_db, "hset", "mails", userid, data)
+end
 -- if moon.queryservice("db_game") > 0 then
 --     ---async
 --     ---@param db integer
