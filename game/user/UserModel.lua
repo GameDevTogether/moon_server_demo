@@ -72,6 +72,12 @@ function UserModel.SetDirty()
     dirty = true
 end
 
+function UserModel.PushData(key,data)
+    dirty = true
+    DBData[key] = data
+    return true
+end
+
 ---检查游戏货币是否足够
 ---@param currencyType integer
 ---@param value integer

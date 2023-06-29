@@ -215,6 +215,11 @@
 ---@field Gate Gate
 
 
+---@class mail_scripts
+---@field Mail Mail
+---@field MailModel MailModel
+
+
 ---@class module_scripts
 ---@field UserData UserData
 
@@ -225,7 +230,6 @@
 
 ---@class user_scripts
 ---@field Bag Bag
----@field Mail Mail
 ---@field Shop Shop
 ---@field User User
 ---@field UserEntry UserEntry

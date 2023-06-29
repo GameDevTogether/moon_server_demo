@@ -97,7 +97,7 @@ end
 ---@param req C2SGM
 function User.C2SGM(req)
     if req.id == 1 then
-        scripts.Mail.TestMail()
+        moon.send("lua",context.addr_mail,"Mail.TestMail",scripts.UserModel.Get().uid)
     end
 end
 

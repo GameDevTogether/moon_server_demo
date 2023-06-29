@@ -26,73 +26,73 @@ clientsimulator.start(function(fd)
     print("-----------bag data-----------")
     print_r(data)
 
+    ---先注释，停下来了
+    -- --购买金币包
+    -- msghelper.send(fd, protocol.encodestring(cmdcode.C2SPurchasePack, { packId = 1 }))
 
-    --购买金币包
-    msghelper.send(fd, protocol.encodestring(cmdcode.C2SPurchasePack, { packId = 1 }))
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------shop purchase gold -----------")
+    -- print_r(data)
+    -- --购买宝石包
 
-    local ok, data = msghelper.read(fd)
-    print("-----------shop purchase gold -----------")
-    print_r(data)
-    --购买宝石包
+    -- msghelper.send(fd, protocol.encodestring(cmdcode.C2SPurchasePack, { packId = 11 }))
 
-    msghelper.send(fd, protocol.encodestring(cmdcode.C2SPurchasePack, { packId = 11 }))
-
-    local ok, data = msghelper.read(fd)
-    print("-----------shop purchase gem-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------shop purchase gem-----------")
+    -- print_r(data)
 
 
-    moon.sleep(1000)
-    --抽奖1号宝箱1次
-    msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 1, count = 1 }))
+    -- moon.sleep(1000)
+    -- --抽奖1号宝箱1次
+    -- msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 1, count = 1 }))
 
-    local ok, data = msghelper.read(fd)
-    print("-----------shop gacha 1 1-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------shop gacha 1 1-----------")
+    -- print_r(data)
 
-    local ok, data = msghelper.read(fd)
-    print("-----------bag data-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------bag data-----------")
+    -- print_r(data)
 
-    --抽奖1号宝箱10次
-    msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 1, count = 10 }))
+    -- --抽奖1号宝箱10次
+    -- msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 1, count = 10 }))
 
-    local ok, data = msghelper.read(fd)
-    print("-----------shop gacha 1 10-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------shop gacha 1 10-----------")
+    -- print_r(data)
 
-    local ok, data = msghelper.read(fd)
-    print("-----------bag data-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------bag data-----------")
+    -- print_r(data)
 
-    --抽奖2号宝箱1次
-    msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 2, count = 1 }))
+    -- --抽奖2号宝箱1次
+    -- msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 2, count = 1 }))
 
-    local ok, data = msghelper.read(fd)
-    print("-----------shop gacha 2 1-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------shop gacha 2 1-----------")
+    -- print_r(data)
 
-    local ok, data = msghelper.read(fd)
-    print("-----------bag data-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------bag data-----------")
+    -- print_r(data)
 
-    --抽奖2号宝箱10次
-    msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 2, count = 10 }))
+    -- --抽奖2号宝箱10次
+    -- msghelper.send(fd, protocol.encodestring(cmdcode.C2SGacha, { chestId = 2, count = 10 }))
 
-    local ok, data = msghelper.read(fd)
-    print("-----------shop gacha 2 10-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------shop gacha 2 10-----------")
+    -- print_r(data)
 
-    local ok, data = msghelper.read(fd)
-    print("-----------bag data-----------")
-    print_r(data)
+    -- local ok, data = msghelper.read(fd)
+    -- print("-----------bag data-----------")
+    -- print_r(data)
 
 
     print("------------------mail data-----------------------")
     msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
     local ok,listdata = msghelper.read(fd)
     print_r(listdata)
-    if #listdata.maillist == {} then
+    if #listdata.maillist == 0 then
         msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
         local ok,data = msghelper.read(fd)
         print_r(data)
