@@ -44,7 +44,9 @@ local enums =
      ---@field public MailNoRewards integer
      ---@field public MailHadRewards integer
      ---@field public MailNoDelete integer
-    ['ErrorCode'] = {   None=0,  ParamInvalid=1,  ConfigError=2,  GoldNotEnough=3,  GemNotEnough=4,  RechargeFailed=5,  AlreadyEquipped=6,  AlreadyUnEquipped=7,  WeaponMaxLevel=8,  MaxEquipWeaponCount=9,  NeedOneWeapnEquipped=10,  WithoutWeapon=11,  MailStateFit=12,  MailNoID=13,  MailNoRewards=14,  MailHadRewards=15,  MailNoDelete=16,  };
+     ---@field public CodeInvalid integer
+     ---@field public CodeFullyRedeemed integer
+    ['ErrorCode'] = {   None=0,  ParamInvalid=1,  ConfigError=2,  GoldNotEnough=3,  GemNotEnough=4,  RechargeFailed=5,  AlreadyEquipped=6,  AlreadyUnEquipped=7,  WeaponMaxLevel=8,  MaxEquipWeaponCount=9,  NeedOneWeapnEquipped=10,  WithoutWeapon=11,  MailStateFit=12,  MailNoID=13,  MailNoRewards=14,  MailHadRewards=15,  MailNoDelete=16,  CodeInvalid=17,  CodeFullyRedeemed=18,  };
     ---@class ItemQuality
      ---@field public White integer
      ---@field public Green integer

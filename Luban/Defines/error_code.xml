@@ -21,6 +21,11 @@
         <var name="MailNoRewards" comment="没有可领取邮件" />
         <var name="MailHadRewards" comment="邮件已被领取" />
         <var name="MailNoDelete" comment="没有可删除邮件" />
+
+
+         <!-- 礼包码 -->
+        <var name="CodeInvalid" comment="礼包码失效" />
+        <var name="CodeFullyRedeemed" comment="礼包被兑换完了" />
     </enum>
 </root>
 

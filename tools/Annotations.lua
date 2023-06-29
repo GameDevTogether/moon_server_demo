@@ -198,6 +198,10 @@
 ---@class S2CGM
 
 
+---@class C2SExchangeGift
+---@field public code string @礼包码
+
+
 
 
 
@@ -208,7 +212,6 @@
 
 ---@class center_scripts
 ---@field CodeGift CodeGift
----@field empty empty
 
 
 ---@class gate_scripts

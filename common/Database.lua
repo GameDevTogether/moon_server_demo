@@ -82,6 +82,19 @@ function _M.saveuser(addr_db, userid, data)
     redis_hsend(userid, addr_db, "hset", "usermap", userid, data)
 end
 
+
+function _M.loadcodegift(addr_db,code)
+    local res, err = redis_hcall( addr_db, "hget", "codegift", code)
+    if res == false then
+        error("loaduser failed:" .. tostring(err))
+    end
+
+    return res
+end
+
+function _M.savecodegift(addr_db,code,count)
+    redis_hsend( addr_db, "hset", "codegift", code,count)
+end
 -- if moon.queryservice("db_game") > 0 then
 --     ---async
 --     ---@param db integer

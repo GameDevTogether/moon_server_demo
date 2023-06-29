@@ -79,6 +79,14 @@ local function run(node_conf)
         },
         {
             unique = true,
+            name = "db_center",
+            file = "moon/service/redisd.lua",
+            threadid = 1,
+            poolsize = 5,
+            opts = db_conf.redis
+        },
+        {
+            unique = true,
             name = "auth",
             file = "game/service_auth.lua",
             threadid = 2,

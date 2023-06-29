@@ -34,6 +34,8 @@ local M={
     S2CMailDeletes = 29,
     C2SGM = 30,
     S2CGM = 31,
+    C2SExchangeGift = 32,
+    S2CExchangeGift = 33,
 
 }
 
@@ -52,6 +54,7 @@ local forward = {
     C2SMailRecives = 'addr_mail',
     C2SMailDeletes = 'addr_mail',
     C2SGM = 'addr_user',
+    C2SExchangeGift = 'addr_user',
 
 }
 

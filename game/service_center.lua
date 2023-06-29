@@ -8,13 +8,15 @@ local conf = ...
 ---@field scripts center_scripts
 local context ={
     conf = conf,
-    match_map={},
-    match_queue={},
-    docmd = nil,
     addr_gate = 0,
-    addr_auth = 0,
+    addr_center = 0,
 }
 
 
 
 common.setup(context)
+
+
+
+context.addr_gate = moon.queryservice("gate")
+context.addr_center = moon.queryservice("db_center")
