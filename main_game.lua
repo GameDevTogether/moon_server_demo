@@ -162,7 +162,7 @@ local function run(node_conf)
 
         ---控制服务初始化顺序,Init一般为加载DB
         assert(moon.call("lua", moon.queryservice("auth"), "Init"))
-        -- assert(moon.call("lua", moon.queryservice("center"), "Init"))
+        assert(moon.call("lua", moon.queryservice("center"), "Init"))
         assert(moon.call("lua", moon.queryservice("gate"), "Init"))
         assert(moon.call("lua", moon.queryservice("node"), "Init"))
         assert(moon.call("lua", moon.queryservice("mail"), "Init"))

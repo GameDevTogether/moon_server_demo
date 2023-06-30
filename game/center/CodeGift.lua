@@ -3,6 +3,7 @@ local common = require("common")
 local Database = common.Database
 local GameCfg = common.GameCfg
 local ErrorCode = common.Enums.ErrorCode
+local CmdCode = common.CmdCode
 
 ---@type user_context
 local context = ...
@@ -13,13 +14,6 @@ local scripts = context.scripts
 ---@class CodeGift
 local CodeGift = {}
 
----检查礼包码是否可用
----@param code string
----@return integer|nil @错误码|空
-function CodeGift.CheckGiftCodeAvailable(code)
-   
-
-end
 
 ---请求兑换礼包码
 ---@param req C2SExchangeGift
@@ -45,5 +39,7 @@ function CodeGift.C2SExchangeGift(req)
     --TODO 发送邮件
 
     
+
+    context.S2C(CmdCode.S2CExchangeGift)
 end
 return CodeGift

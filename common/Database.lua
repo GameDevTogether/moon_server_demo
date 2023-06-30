@@ -16,6 +16,9 @@ local redis_hcall = redisd.hash_call
 
 local redis_hsend = redisd.hash_send
 
+
+
+
 local _M = {}
 
 function _M.loadallopenid(addr_db)
@@ -82,9 +85,8 @@ function _M.saveuser(addr_db, userid, data)
     redis_hsend(userid, addr_db, "hset", "usermap", userid, data)
 end
 
-
-function _M.loadcodegift(addr_db,code)
-    local res, err = redis_hcall( addr_db, "hget", "codegift", code)
+function _M.loadcodegift(addr_db, code)
+    local res, err = redis_hcall("codegift", addr_db, "hget", code)
     if res == false then
         error("loaduser failed:" .. tostring(err))
     end
@@ -92,11 +94,11 @@ function _M.loadcodegift(addr_db,code)
     return res
 end
 
-function _M.savecodegift(addr_db,code,count)
-    redis_hsend( addr_db, "hset", "codegift", code,count)
+function _M.savecodegift(addr_db, code, count)
+    redis_hsend("codegift", addr_db, "hset", code, count)
 end
 
-function _M.loadusermails(addr_db,userid)
+function _M.loadusermails(addr_db, userid)
     local res, err = redis_hcall(userid, addr_db, "hget", "mails", userid)
     if res == false then
         error("loadmails failed:" .. tostring(err))
@@ -105,9 +107,10 @@ function _M.loadusermails(addr_db,userid)
     return res
 end
 
-function _M.saveusermails(addr_db,userid,data)
+function _M.saveusermails(addr_db, userid, data)
     redis_hsend(userid, addr_db, "hset", "mails", userid, data)
 end
+
 -- if moon.queryservice("db_game") > 0 then
 --     ---async
 --     ---@param db integer

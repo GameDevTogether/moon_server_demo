@@ -9,7 +9,8 @@ local conf = ...
 local context ={
     conf = conf,
     addr_gate = 0,
-    addr_center = 0,
+    addr_db_center = 0,
+    addr_mail = 0
 }
 
 
@@ -18,5 +19,4 @@ common.setup(context)
 
 
 
-context.addr_gate = moon.queryservice("gate")
-context.addr_center = moon.queryservice("db_center")
+
