@@ -20,6 +20,12 @@
 ---@field public itemMap table<integer, GachaItem> @所有宝箱抽奖数据
 
 
+---@class AdData
+---@field public count integer @每天观看广告次数
+---@field public totalcount integer @光看广告总次数
+---@field public lastadtime integer @最后一个看广告时间
+
+
 ---@class UserData
 ---@field public openid string @
 ---@field public uid integer @玩家uid
@@ -33,6 +39,7 @@
 ---@field public bag BagData @背包数据
 ---@field public gacha GachaData @抽奖数据
 ---@field public mails MailData[] @邮件数据
+---@field public ad AdData @广告数据
 
 
 ---@class UserAllData
@@ -230,15 +237,12 @@
 ---@field Mail Mail
 
 
----@class module_scripts
----@field UserData UserData
-
-
 ---@class node_scripts
 ---@field Console Console
 
 
 ---@class user_scripts
+---@field Ad Ad
 ---@field Bag Bag
 ---@field Shop Shop
 ---@field User User
