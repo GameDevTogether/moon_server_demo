@@ -24,6 +24,15 @@ message GachaData{
     map<int32,GachaItem> itemMap = 1; //所有宝箱抽奖数据 
 }
 
+
+//广告数据
+message AdData{
+    int32 count = 1; //每天观看广告次数
+    int32 totalcount = 2; //光看广告总次数
+    int64 lastadtime = 3; //最后一个看广告时间
+}
+
+
 message UserData{
     string openid = 1;//
     int64 uid = 2;//玩家uid
@@ -39,6 +48,8 @@ message UserData{
     //日常任务
     GachaData gacha = 11; //抽奖数据
     repeated MailData mails = 12;//邮件数据
+
+    AdData ad = 13; //广告数据
 }
 
 message UserAllData{

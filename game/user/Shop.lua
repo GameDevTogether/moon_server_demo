@@ -1,9 +1,9 @@
 local moon = require("moon")
+local ModelFactory = require("common.ModelFactory")
 
 local random = require("random")
 local uuid = require("uuid")
 local common = require("common")
-local UserData = require("game.module.UserData")
 local CmdCode = common.CmdCode
 local GameCfg = common.GameCfg
 local ErrorCode = common.Enums.ErrorCode
@@ -98,7 +98,7 @@ function Shop.Gacha(id, count)
         --增加抽奖计数
         local itemMap = userDataRW.gacha.itemMap
         if not itemMap[id] then
-            itemMap[id] = UserData.CreateGachaItem()
+            itemMap[id] = ModelFactory.CreateGachaItem()
             itemMap[id].id = id
         end
         itemMap[id].count = itemMap[id].count + 1

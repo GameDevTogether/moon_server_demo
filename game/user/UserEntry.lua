@@ -1,7 +1,8 @@
 local moon = require("moon")
 local common = require("common")
 local Database = common.Database
-local UserData = require("game.module.UserData")
+local ModelFactory = require("common.ModelFactory")
+
 local GameCfg = common.GameCfg
 
 ---@type user_context
@@ -38,7 +39,7 @@ function Entry.StartModule(req)
             isnew = true
 
             ---create new user
-            data = UserData.Create()
+            data = ModelFactory.CreateUserData()
             data.openid = req.openid
             data.uid = req.uid
             data.name = req.openid

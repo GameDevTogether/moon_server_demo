@@ -1,9 +1,9 @@
-
-local UserData = {}
+---@class ModelFactory 数据结构工厂
+local ModelFactory = {}
 
 ---创建默认userdata
 ---@return UserData
-function UserData.Create()
+function ModelFactory.CreateUserData()
     return {
         openid = "",
         uid = 0,
@@ -23,10 +23,17 @@ function UserData.Create()
         gacha = {
             itemMap = {}
         },
+        ad = {
+            count = 0,
+            totalcount = 0,
+            lastadtime = 0
+        }
     }
 end
 
-function UserData.CreateGachaItem()
+---创建默认抽奖数据
+---@return GachaItem
+function ModelFactory.CreateGachaItem()
     return {
         id = 0,
         count = 0
@@ -34,4 +41,4 @@ function UserData.CreateGachaItem()
 end
 
 
-return UserData
+return ModelFactory

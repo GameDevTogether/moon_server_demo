@@ -26,6 +26,10 @@
          <!-- 礼包码 -->
         <var name="CodeInvalid" comment="礼包码失效" />
         <var name="CodeFullyRedeemed" comment="礼包被兑换完了" />
+
+         <!-- 广告 -->
+        <var name="AdOverCountLimit" comment="广告观看次数已达上限" />
+        <var name="AdInCDTime" comment="观看广告在cd中" />
     </enum>
 </root>
 

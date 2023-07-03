@@ -127,3 +127,25 @@ message S2CGM
 
 }
 
+
+//请求广告客户端id
+message C2SAdAppId
+{
+
+}
+message S2CAdAppId
+{
+    int64 id = 1;
+}
+
+//本次广告id
+message C2SAdId
+{
+
+}
+
+message S2CAdId
+{
+    int64 id = 1;
+}
+

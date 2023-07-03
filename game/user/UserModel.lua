@@ -92,7 +92,7 @@ end
 ---@param value integer
 ---@return integer|nil @错误吗|nil
 function UserModel.CheckCurrencyEnough(currencyType, value)
-    assert(currencyType ~= CurrencyType.Money, "param currencyType must be gold/gem")
+    assert(currencyType ~= CurrencyType.Cash, "param currencyType must be gold/gem")
 
     local data = UserModel.Get()
 
@@ -119,7 +119,7 @@ function UserModel.AddCurrency(currencyType, value)
         end
     end
 
-    assert(currencyType ~= CurrencyType.Money, "param currencyType must be gold/gem")
+    assert(currencyType ~= CurrencyType.Cash, "param currencyType must be gold/gem")
 
     local data = UserModel.MutGet()
 
