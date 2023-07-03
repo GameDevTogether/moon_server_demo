@@ -91,112 +91,119 @@ clientsimulator.start(function(fd)
     print("------------------mail data-----------------------")
     msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
     local ok,listdata = msghelper.read(fd)
-    print_r(listdata)
-    if #listdata.maillist == 0 then
-        msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
-        local ok,data = msghelper.read(fd)
-        print_r(data)
+    -- print_r(listdata)
+    -- if #listdata.maillist == 0 then
+    --     msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
+    --     local ok,data = msghelper.read(fd)
+    --     print_r(data)
     
-        msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
-        local ok,data = msghelper.read(fd)
-        print_r(data)
+    --     msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
+    --     local ok,data = msghelper.read(fd)
+    --     print_r(data)
     
-        msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
-        local ok,data = msghelper.read(fd)
-        print_r(data)
+    --     msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
+    --     local ok,data = msghelper.read(fd)
+    --     print_r(data)
     
-        msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
-        local ok,data = msghelper.read(fd)
-        print_r(data)
+    --     msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
+    --     local ok,data = msghelper.read(fd)
+    --     print_r(data)
     
-        msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
-        local ok,data = msghelper.read(fd)
-        print_r(data)
+    --     msghelper.send(fd, protocol.encodestring(cmdcode.C2SGM, { id = 1, jsonParams = "" }))
+    --     local ok,data = msghelper.read(fd)
+    --     print_r(data)
     
-        msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
-        ok,listdata = msghelper.read(fd)
-        print_r(listdata)
-    end
+    --     msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
+    --     ok,listdata = msghelper.read(fd)
+    --     print_r(listdata)
+    -- end
 
-    print(fd,"Please input('quit' for exit):")
-    local isEnd = true
-    while isEnd do
-        local input = io.read()
-        moon.sleep(100)
-        if input then
-            if input == "exit" or input == "quit" then
-                msghelper.close(fd)
-                moon.quit()
-                break
-            end
-            if input == "delete" then
-                local id = 0
-                local len = 0
-                for i,v in pairs(listdata.maillist) do
-                    if v.state == 3 then
-                        len = i
-                        id = v.msgid
-                        break
-                    end
-                end
-                if id~= 0 then
-                    table.remove(listdata.maillist,len)
-                    msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailDelete,{msgid = id}))
-                    local ok,data = msghelper.read(fd)
-                    print_r(data)
-                else
-                    print("no delete")
-                end
-            elseif input == "get" then
-                msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
-                ok,listdata = msghelper.read(fd)
-                print_r(listdata)
-            elseif input == "deletes"  then
-                msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailDeletes,{}))
-                local ok,data = msghelper.read(fd)
-                print_r(data)
-            elseif input == "reward"  then
-                local id = 0
-                for _,v in pairs(listdata.maillist) do
-                    if v.state == 2 then
-                        v.state = 3
-                        id = v.msgid
-                        break
-                    end
-                end
-                if id~= 0 then
-                    msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailRecive,{msgid = id}))
-                    local ok,data = msghelper.read(fd)
-                    print_r(data)
-                else
-                    print("no reward")
-                end
+    -- print(fd,"Please input('quit' for exit):")
+    -- local isEnd = true
+    -- while isEnd do
+    --     local input = io.read()
+    --     moon.sleep(100)
+    --     if input then
+    --         if input == "exit" or input == "quit" then
+    --             msghelper.close(fd)
+    --             moon.quit()
+    --             break
+    --         end
+    --         if input == "delete" then
+    --             local id = 0
+    --             local len = 0
+    --             for i,v in pairs(listdata.maillist) do
+    --                 if v.state == 3 then
+    --                     len = i
+    --                     id = v.msgid
+    --                     break
+    --                 end
+    --             end
+    --             if id~= 0 then
+    --                 table.remove(listdata.maillist,len)
+    --                 msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailDelete,{msgid = id}))
+    --                 local ok,data = msghelper.read(fd)
+    --                 print_r(data)
+    --             else
+    --                 print("no delete")
+    --             end
+    --         elseif input == "get" then
+    --             msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailList,{}))
+    --             ok,listdata = msghelper.read(fd)
+    --             print_r(listdata)
+    --         elseif input == "deletes"  then
+    --             msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailDeletes,{}))
+    --             local ok,data = msghelper.read(fd)
+    --             print_r(data)
+    --         elseif input == "reward"  then
+    --             local id = 0
+    --             for _,v in pairs(listdata.maillist) do
+    --                 if v.state == 2 then
+    --                     v.state = 3
+    --                     id = v.msgid
+    --                     break
+    --                 end
+    --             end
+    --             if id~= 0 then
+    --                 msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailRecive,{msgid = id}))
+    --                 local ok,data = msghelper.read(fd)
+    --                 print_r(data)
+    --             else
+    --                 print("no reward")
+    --             end
               
-            elseif input == "rewards"  then
-                msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailRecives,{}))
-                local ok,data = msghelper.read(fd)
-                print_r(data)
-            elseif input == "read"  then
-                local id = 0
-                for _,v in pairs(listdata.maillist) do
-                    if v then
-                        print_r(v)
-                        if v.state == 1 then
-                            v.state = 2
-                            id = v.msgid
-                            break
-                        end
-                    end
-                end
-                if id~= 0 then
-                    msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailState,{msgid = id}))
-                    -- local ok,data = msghelper.read(fd)
-                    print_r(listdata)
-                else
-                    print("no can read")
-                    -- print_r(listdata)
-                end
-            end
-        end
-    end
+    --         elseif input == "rewards"  then
+    --             msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailRecives,{}))
+    --             local ok,data = msghelper.read(fd)
+    --             print_r(data)
+    --         elseif input == "read"  then
+    --             local id = 0
+    --             for _,v in pairs(listdata.maillist) do
+    --                 if v then
+    --                     print_r(v)
+    --                     if v.state == 1 then
+    --                         v.state = 2
+    --                         id = v.msgid
+    --                         break
+    --                     end
+    --                 end
+    --             end
+    --             if id~= 0 then
+    --                 msghelper.send(fd,protocol.encodestring(cmdcode.C2SMailState,{msgid = id}))
+    --                 -- local ok,data = msghelper.read(fd)
+    --                 print_r(listdata)
+    --             else
+    --                 print("no can read")
+    --                 -- print_r(listdata)
+    --             end
+    --         end
+    --     end
+    -- end
+
+    msghelper.send(fd, protocol.encodestring(cmdcode.C2SExchangeGift,{code = "moon111"}))
+    local ok,data = msghelper.read(fd)
+    print_r(data)
+    local ok,data = msghelper.read(fd)
+    print_r(data)
+
 end)

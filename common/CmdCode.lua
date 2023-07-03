@@ -54,7 +54,7 @@ local forward = {
     C2SMailRecives = 'addr_mail',
     C2SMailDeletes = 'addr_mail',
     C2SGM = 'addr_user',
-    C2SExchangeGift = 'addr_user',
+    C2SExchangeGift = 'addr_center',
 
 }
 

@@ -39,6 +39,13 @@
 ---@field public userdata UserData @玩家用户数据，登录下发
 
 
+---@class C2SExchangeGift
+---@field public code string @礼包码
+
+
+---@class S2CExchangeGift
+
+
 ---@class ItemData
 ---@field public id integer @道具id
 ---@field public count integer @道具数量
@@ -202,13 +209,6 @@
 ---@class S2CGM
 
 
----@class C2SExchangeGift
----@field public code string @礼包码
-
-
----@class S2CExchangeGift
-
-
 
 
 
@@ -218,6 +218,7 @@
 
 
 ---@class center_scripts
+---@field Center Center
 ---@field CodeGift CodeGift
 
 

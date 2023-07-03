@@ -1,0 +1,12 @@
+syntax = "proto3";
+option csharp_namespace = "NetMessage";
+
+//兑换礼包
+message C2SExchangeGift{
+    string code = 1; //礼包码
+}
+
+
+message S2CExchangeGift{
+
+}

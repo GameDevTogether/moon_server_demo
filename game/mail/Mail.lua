@@ -1,5 +1,5 @@
 local moon = require("moon")
-
+local json = require("json")
 local random = require("random")
 local uuid = require("uuid")
 local common = require("common")
@@ -8,7 +8,7 @@ local UserData = require("game.module.UserData")
 local CmdCode = common.CmdCode
 local GameCfg = common.GameCfg
 local ErrorCode = common.Enums.ErrorCode
-
+local jdecode = json.decode
 
 ---@type mail_context
 local context = ...
@@ -34,6 +34,7 @@ function Mail.LoadUserMail(uid)
     if type(context.mails[uid] )=="table" then return context.mails[uid]  end
     ---@type UserData
     local data = Database.loadusermails(context.addr_db_user, uid)
+    data = jdecode(data)
     context.mails[uid] = data
     return data or {}
 end

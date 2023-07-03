@@ -1,11 +1,13 @@
 local moon = require("moon")
+local uuid = require("uuid")
 local common = require("common")
 local Database = common.Database
 local GameCfg = common.GameCfg
 local ErrorCode = common.Enums.ErrorCode
 local CmdCode = common.CmdCode
 
----@type user_context
+
+---@type center_scripts
 local context = ...
 local scripts = context.scripts
 
@@ -16,15 +18,16 @@ local CodeGift = {}
 
 
 ---请求兑换礼包码
+---@param uid integer
 ---@param req C2SExchangeGift
-function CodeGift.C2SExchangeGift(req)
+function CodeGift.C2SExchangeGift(uid, req)
     local code = req.code
     local config = GameCfg.codegifts[code]
     if not config then
         return ErrorCode.CodeInvalid
     end
 
-    local count = Database.loadcodegift(context.addr_center,code)
+    local count = Database.loadcodegift(context.addr_db_center, code)
     if not count then
         count = config.count
     end
@@ -34,12 +37,28 @@ function CodeGift.C2SExchangeGift(req)
     end
 
     count = count - 1
-    Database.savecodegift(context.addr_center,code,count)
+    Database.savecodegift(context.addr_db_center, code, count)
 
     --TODO 发送邮件
+    local mailData = {
+        msgid = uuid.next(),
+        id = "test id",
+        itemlist = {
+            {
+                id = 1,
+                count = math.random(1, 5),
+            }, {
+            id = 2,
+            count = math.random(1, 30),
+        }, },
+        state = 1,
+        jsonparams = "test",
+    }
 
-    
+    moon.send("lua", context.addr_mail, "Mail.S2CUpdateMail", uid, { mail = mailData })
 
-    context.S2C(CmdCode.S2CExchangeGift)
+
+    context.S2C(uid,CmdCode.S2CExchangeGift)
 end
+
 return CodeGift

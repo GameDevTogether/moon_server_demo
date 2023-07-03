@@ -127,14 +127,3 @@ message S2CGM
 
 }
 
-//兑换礼包
-message C2SExchangeGift
-{
-    string code = 1; //礼包码
-}
-
-
-message S2CExchangeGift
-{
-
-}
