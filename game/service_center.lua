@@ -11,6 +11,7 @@ local context ={
     addr_gate = 0,
     addr_db_center = 0,
     addr_mail = 0,
+    ---@type center_scripts
     scripts = {}
 }
 

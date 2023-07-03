@@ -7,8 +7,9 @@ local ErrorCode = common.Enums.ErrorCode
 local CmdCode = common.CmdCode
 
 
----@type center_scripts
+---@type center_context
 local context = ...
+---@type center_scripts
 local scripts = context.scripts
 
 
