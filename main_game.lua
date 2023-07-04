@@ -206,9 +206,9 @@ local function run(node_conf)
                 assert(moon.call("lua", moon.queryservice("auth"), "Auth.Shutdown"))
                 moon.sleep(5000)
                 moon.raw_send("system", moon.queryservice("db_server"), "wait_save")
+                moon.raw_send("system", moon.queryservice("db_center"), "wait_save")
                 moon.raw_send("system", moon.queryservice("db_user"), "wait_save")
                 moon.raw_send("system", moon.queryservice("db_openid"), "wait_save")
-
                 if moon.queryservice("db_game") > 0 then
                     moon.raw_send("system", moon.queryservice("db_game"), "wait_save")
                 end
@@ -219,12 +219,26 @@ local function run(node_conf)
             end
 
             ---wait all service quit
+            local count = 0
             while true do
                 local size = moon.server_stats("service.count")
                 if size == 2 then
                     break
                 end
-                moon.sleep(200)
+                moon.sleep(5000)
+                if count ~= tonumber(size) then
+                    count = tonumber(size)
+                    local THREAD_NUM = math.tointeger(moon.env("THREAD_NUM"))
+                    for i = 1, THREAD_NUM do
+                        local s = json.decode(moon.scan_services(i))
+                        if s then
+                            for _, v in pairs(s) do
+                                print(json.encode(v))
+                            end
+                        end
+                    end
+                end
+
                 print("bootstrap wait all service quit, now count:", size)
             end
 

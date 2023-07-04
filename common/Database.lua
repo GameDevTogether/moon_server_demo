@@ -86,7 +86,7 @@ function _M.saveuser(addr_db, userid, data)
 end
 
 function _M.loadcodegift(addr_db, code)
-    local res, err = redis_call( addr_db, "hget","codegift", code)
+    local res, err = redis_call(addr_db, "hget", "codegift", code)
     if res == false then
         error("load codegift failed:" .. tostring(err))
     end
@@ -95,14 +95,18 @@ function _M.loadcodegift(addr_db, code)
 end
 
 function _M.savecodegift(addr_db, code, count)
-    print(code,count)
-    redis_call(addr_db, "hset", "codegift",code, count)
+    print(code, count)
+    redis_call(addr_db, "hset", "codegift", code, count)
 end
 
 function _M.loadusermails(addr_db, userid)
     local res, err = redis_hcall(userid, addr_db, "hget", "mails", userid)
     if res == false then
         error("loadmails failed:" .. tostring(err))
+    end
+
+    if res then
+        res = jdecode(res)
     end
 
     return res
