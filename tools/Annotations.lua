@@ -3,82 +3,21 @@
 --- </auto-generated>
 
 
----@class AuthUser
----@field public addr_user integer @玩家服务address
----@field public openid string @
----@field public uid integer @玩家uid
----@field public logouttime integer @玩家登出时间,0表示在线
----@field public online boolean @@是否在线
+---@class C2STaskList
+---@field public tasklist TaskData[] @玩家任务列表数据
 
 
----@class GachaItem
----@field public id integer @宝箱id
----@field public count integer @抽奖次数
+---@class S2CTaskList
+---@field public tasklist TaskData[] @玩家任务列表数据
 
 
----@class GachaData
----@field public itemMap table<integer, GachaItem> @所有宝箱抽奖数据
+---@class S2CTaskUpdate
+---@field public updateinfos TaskUpdateData[] @任务更新数据
 
 
----@class AdData
----@field public count integer @每天观看广告次数
----@field public totalcount integer @光看广告总次数
----@field public lastadtime integer @最后一个看广告时间
-
-
----@class UserData
----@field public openid string @
----@field public uid integer @玩家uid
----@field public name string @玩家名字
----@field public level integer @玩家等级
----@field public exp integer @当前经验
----@field public logintime integer @玩家上线时间
----@field public gem integer @宝石
----@field public gold integer @金币
----@field public levelId integer @当前章节ID
----@field public bag BagData @背包数据
----@field public gacha GachaData @抽奖数据
----@field public mails MailData[] @邮件数据
----@field public ad AdData @广告数据
-
-
----@class UserAllData
----@field public userdata UserData @玩家用户数据，登录下发
-
-
----@class C2SExchangeGift
----@field public code string @礼包码
-
-
----@class S2CExchangeGift
-
-
----@class ItemData
----@field public id integer @道具id
----@field public count integer @道具数量
-
-
----@class WeaponData
----@field public uid integer @唯一id
----@field public weaponId integer @武器id
----@field public level integer @等级
----@field public star integer @星级
----@field public quailty integer @品质
-
-
----@class BagData
----@field public itemMap table<integer, ItemData> @道具列表
----@field public equipedIdList integer[] @已装备的id
----@field public weaponMap table<integer, WeaponData> @装备列表
----@field public maxCanEquipCount integer @最大可装备数量
-
-
----@class MailData
----@field public msgid integer @邮件唯一id
----@field public id string @邮件配置id
----@field public state integer @邮件状态，1、未读，2、已读未领取，3、已读已领取
----@field public jsonparams string @动态的内容,客户端自己解析
----@field public itemlist ItemData[] @动态实际奖励
+---@class C2STaskOpt
+---@field public opt integer @操作类型，1、接取任务，2、提交任务
+---@field public taskid integer @任务配置id
 
 
 ---@class S2CUpdateMail
@@ -127,6 +66,62 @@
 
 ---@class S2CMailDeletes
 ---@field public msgids integer[] @删除的ids
+
+
+---@class AuthUser
+---@field public addr_user integer @玩家服务address
+---@field public openid string @
+---@field public uid integer @玩家uid
+---@field public logouttime integer @玩家登出时间,0表示在线
+---@field public online boolean @@是否在线
+
+
+---@class GachaItem
+---@field public id integer @宝箱id
+---@field public count integer @抽奖次数
+
+
+---@class GachaData
+---@field public itemMap table<integer, GachaItem> @所有宝箱抽奖数据
+
+
+---@class AdData
+---@field public count integer @每天观看广告次数
+---@field public totalcount integer @光看广告总次数
+---@field public lastadtime integer @最后一个看广告时间
+
+
+---@class STaskData
+---@field public tasks table<integer, TaskData> @任务数据
+---@field public finishs table<integer, integer> @任务完成数
+
+
+---@class UserData
+---@field public openid string @
+---@field public uid integer @玩家uid
+---@field public name string @玩家名字
+---@field public level integer @玩家等级
+---@field public exp integer @当前经验
+---@field public logintime integer @玩家上线时间
+---@field public gem integer @宝石
+---@field public gold integer @金币
+---@field public levelId integer @当前章节ID
+---@field public bag BagData @背包数据
+---@field public gacha GachaData @抽奖数据
+---@field public ad AdData @广告数据
+---@field public dots table<integer, integer> @数据打点
+---@field public task STaskData @任务数据
+
+
+---@class UserAllData
+---@field public userdata UserData @玩家用户数据，登录下发
+
+
+---@class C2SExchangeGift
+---@field public code string @礼包码
+
+
+---@class S2CExchangeGift
 
 
 ---@class S2CErrorCode
@@ -216,6 +211,71 @@
 ---@class S2CGM
 
 
+---@class C2SAdAppId
+
+
+---@class S2CAdAppId
+---@field public id integer
+
+
+---@class C2SAdId
+
+
+---@class S2CAdId
+---@field public id integer
+
+
+---@class ItemData
+---@field public id integer @道具id
+---@field public count integer @道具数量
+
+
+---@class WeaponData
+---@field public uid integer @唯一id
+---@field public weaponId integer @武器id
+---@field public level integer @等级
+---@field public star integer @星级
+---@field public quailty integer @品质
+
+
+---@class BagData
+---@field public itemMap table<integer, ItemData> @道具列表
+---@field public equipedIdList integer[] @已装备的id
+---@field public weaponMap table<integer, WeaponData> @装备列表
+---@field public maxCanEquipCount integer @最大可装备数量
+
+
+---@class MailData
+---@field public msgid integer @邮件唯一id
+---@field public id string @邮件配置id
+---@field public state integer @邮件状态，1、未读，2、已读未领取，3、已读已领取
+---@field public jsonparams string @动态的内容,客户端自己解析
+---@field public itemlist ItemData[] @动态实际奖励
+
+
+---@class DOUBLE_INT
+---@field public key integer @key
+---@field public value integer @value
+
+
+---@class TaskData
+---@field public taskid integer @任务配置id
+---@field public state integer @任务状态 1、不可接受，2、可接，3、已接，4、可提交 5、已提交
+---@field public condcount integer @任务条件
+
+
+---@class TaskUpdateData
+---@field public updatetype integer @更新类型 1、更新任务状态，2、更新任务完成条件 3、新增任务 4、删除任务 5、新增已提交任务
+---@field public taskid integer @任务配置id
+---@field public state integer @更新任务状态 1、不可接受，2、可接，3、已接，4、可提交 5、已提交
+---@field public condcount integer @任务条件
+
+
+---@class TaskFinishData
+---@field public taskid integer @配置id
+---@field public cout integer @完成次数
+
+
 
 
 
@@ -224,36 +284,39 @@
 ---@field Auth Auth
 
 
+---@class mail_scripts
+---@field Mail Mail
+
+
 ---@class center_scripts
 ---@field Center Center
 ---@field CodeGift CodeGift
+
+
+---@class user_scripts
+---@field Ad Ad
+---@field Dot Dot
+---@field UserEntry UserEntry
+---@field Shop Shop
+---@field User User
+---@field Task Task
+---@field Weapon Weapon
+---@field UserModel UserModel
+---@field Bag Bag
 
 
 ---@class gate_scripts
 ---@field Gate Gate
 
 
----@class mail_scripts
----@field Mail Mail
-
-
 ---@class node_scripts
 ---@field Console Console
 
 
----@class user_scripts
----@field Ad Ad
----@field Bag Bag
----@field Shop Shop
----@field User User
----@field UserEntry UserEntry
----@field UserModel UserModel
----@field Weapon Weapon
-
-
 ---@class static_conf
----@field codegifts codegifts_cfg[]
----@field gachaconfigs gachaconfigs_cfg[]
----@field gameitemconfigs gameitemconfigs_cfg[]
+---@field taskconfigs taskconfigs_cfg[]
 ---@field shopcurrencypackconfigs shopcurrencypackconfigs_cfg[]
+---@field gachaconfigs gachaconfigs_cfg[]
+---@field codegifts codegifts_cfg[]
 ---@field weaponconfigs weaponconfigs_cfg[]
+---@field gameitemconfigs gameitemconfigs_cfg[]

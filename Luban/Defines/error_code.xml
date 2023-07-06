@@ -30,6 +30,9 @@
          <!-- 广告 -->
         <var name="AdOverCountLimit" comment="广告观看次数已达上限" />
         <var name="AdInCDTime" comment="观看广告在cd中" />
+        <!-- 任务 -->
+        <var name="TaskOptError" comment="错误的任务操作" />
+        <var name="TaskError" comment="找不到对应任务" />
     </enum>
 </root>
 

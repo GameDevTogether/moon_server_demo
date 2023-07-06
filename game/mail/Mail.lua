@@ -70,6 +70,23 @@ function Mail.TestMail(uid)
     Mail.S2CUpdateMail(uid, { mail = mail })
 end
 
+---添加邮件
+---@param uid integer
+---@param id string
+---@param itemlist ItemData[]
+---@param jsonparams string
+function Mail.AddMail(uid, id, itemlist, jsonparams)
+    ---@type MailData
+    local mail = {
+        msgid = uuid.next,
+        id = id,
+        itemlist = itemlist,
+        jsonparams = jsonparams,
+        state = 1
+    }
+    Mail.S2CUpdateMail(uid, { mail = mail })
+end
+
 ---同步 邮件数据
 ---@param data S2CUpdateMail 邮件内容
 function Mail.S2CUpdateMail(uid, data)
