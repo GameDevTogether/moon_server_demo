@@ -41,3 +41,26 @@ message MailData{
     string jsonparams = 4;//动态的内容,客户端自己解析
     repeated ItemData itemlist = 5;//动态实际奖励
 }
+
+message DOUBLE_INT {
+    uint32 key = 1;   //key
+    uint32 value = 2;   //value
+}
+
+message TaskData{
+    int32 taskid = 1;//任务配置id
+    int32 state = 2;//任务状态 1、不可接受，2、可接，3、已接，4、可提交 5、已提交
+    int32 condcount = 3;//任务条件
+}
+message TaskUpdateData
+{
+    uint32 updatetype	= 1;   //更新类型 1、更新任务状态，2、更新任务完成条件 3、新增任务 4、删除任务 5、新增已提交任务
+    int32 taskid = 2;//任务配置id
+    int32 state = 3;//更新任务状态 1、不可接受，2、可接，3、已接，4、可提交 5、已提交
+    int32 condcount = 4;//任务条件 
+}
+message TaskFinishData {
+    uint32 taskid= 1;//配置id
+    uint32 cout = 2;//完成次数
+}
+

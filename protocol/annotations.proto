@@ -32,6 +32,28 @@ message AdData{
     int64 lastadtime = 3; //最后一个看广告时间
 }
 
+message STaskData {
+    map<uint32, TaskData> tasks = 1;//任务数据
+    map<uint32,uint32> finishs = 2;//任务完成数
+}
+
+message DailyTaskData {
+    int32 lastedtime = 1;//日常任务发放时间
+    required int32 rewards = 2;//奖励领取id索引
+    required int32 tasks = 3;//任务ids
+}
+
+message WeekTaskData {
+    int32 lastedtime = 1;//周常任务发放时间
+    required int32 rewards = 2;//奖励领取id索引
+    required int32 tasks = 3;//任务ids
+}
+
+message PassTaskData {
+    int32 lastedtime = 1;//通行证赛季任务发放时间
+    required int32 rewards = 2;//奖励领取id索引
+    required int32 tasks = 3;//任务ids
+}
 
 message UserData{
     string openid = 1;//
@@ -47,9 +69,14 @@ message UserData{
     BagData bag = 10; //背包数据
     //日常任务
     GachaData gacha = 11; //抽奖数据
-    repeated MailData mails = 12;//邮件数据
 
-    AdData ad = 13; //广告数据
+    AdData ad = 12; //广告数据
+    map<uint32, uint32> dots = 13;//数据打点
+    STaskData task = 13;//任务数据
+    DailyTaskData daily = 14;//日常数据
+    WeekTaskData week = 15;//周常数据
+    PassTaskData pass = 16;//通信证数据
+
 }
 
 message UserAllData{

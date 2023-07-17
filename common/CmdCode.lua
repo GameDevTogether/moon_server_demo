@@ -36,6 +36,14 @@ local M={
     S2CGM = 31,
     C2SExchangeGift = 32,
     S2CExchangeGift = 33,
+    C2STaskList = 34,
+    S2CTaskList = 35,
+    S2CTaskUpdate = 36,
+    C2STaskOpt = 37,
+    C2SAdAppId = 38,
+    S2CAdAppId = 39,
+    C2SAdId = 40,
+    S2CAdId = 41,
 
 }
 
@@ -55,6 +63,10 @@ local forward = {
     C2SMailDeletes = 'addr_mail',
     C2SGM = 'addr_user',
     C2SExchangeGift = 'addr_center',
+    C2STaskList = 'addr_task',
+    C2STaskOpt = 'addr_task',
+    C2SAdAppId = 'addr_user',
+    C2SAdId = 'addr_user',
 
 }
 

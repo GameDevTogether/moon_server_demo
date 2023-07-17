@@ -1,0 +1,27 @@
+syntax = "proto3";
+option csharp_namespace = "NetMessage";
+import "common.proto";
+
+//请求 玩家任务数据
+message C2STaskList
+{
+   repeated TaskData tasklist = 1;//玩家任务列表数据
+}
+//返回 玩家任务数据
+message S2CTaskList
+{
+    repeated TaskData tasklist = 1;//玩家任务列表数据
+}
+//任务更新
+message S2CTaskUpdate
+{
+    repeated TaskUpdateData updateinfos = 1;//任务更新数据
+}
+//请求 任务操作
+message C2STaskOpt
+{
+    uint32 opt = 1;//操作类型，1、接取任务，2、提交任务
+    uint32 taskid = 2;//任务配置id
+}
+
+
