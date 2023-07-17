@@ -30,3 +30,4 @@
 *.out
 *.app
 log
+tools/__pycache__
