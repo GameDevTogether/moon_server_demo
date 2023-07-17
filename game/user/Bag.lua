@@ -12,7 +12,16 @@ local scripts = context.scripts
 local Bag = {}
 
 function Bag.Init()
-
+   
+    local data = scripts.UserModel.Get()
+    if not data.bag then
+        data.bag = {
+            itemMap = {},
+            equipedIdList = {},
+            weaponMap = {},
+            maxCanEquipCount = 1,
+        }
+    end
 end
 
 function Bag.Start()

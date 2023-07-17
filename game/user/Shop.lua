@@ -21,7 +21,12 @@ local scripts = context.scripts
 local Shop = {}
 
 function Shop.Init()
-
+    local data = scripts.UserModel.Get()
+    if not data.gacha then
+        data.gacha = {
+            itemMap = {}
+        }
+    end
 end
 
 function Shop.Start()

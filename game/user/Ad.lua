@@ -15,6 +15,19 @@ local MaxAdCount = 30
 ---@class Ad
 local Ad = {}
 
+---初始化函数
+function Ad.Init()
+    local userdata = context.scripts.UserModel.Get()
+    if not userdata.ad then
+        userdata.ad = {
+            count = 0,
+            totalcount = 0,
+            lastadtime = 0
+        }
+    end
+end
+
+
 ---在线检查一下有没有跨天
 function Ad.Online()
     Ad.ClearAdCountOnNextDay()

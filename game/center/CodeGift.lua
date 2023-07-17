@@ -9,7 +9,7 @@ local CmdCode = common.CmdCode
 
 ---@type center_context
 local context = ...
----@type center_scripts
+
 local scripts = context.scripts
 
 
@@ -56,10 +56,14 @@ function CodeGift.C2SExchangeGift(uid, req)
         jsonparams = "test",
     }
 
+    --给客户端发送邮件
     moon.send("lua", context.addr_mail, "Mail.S2CUpdateMail", uid, { mail = mailData })
 
-
+    --通知客户端兑换成功
     context.S2C(uid,CmdCode.S2CExchangeGift)
+
+
+
 end
 
 return CodeGift

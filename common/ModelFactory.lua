@@ -1,7 +1,7 @@
 ---@class ModelFactory 数据结构工厂
 local ModelFactory = {}
 
----创建默认userdata
+---创建默认user基础数据
 ---@return UserData
 function ModelFactory.CreateUserData()
     return {
@@ -14,20 +14,7 @@ function ModelFactory.CreateUserData()
         gem = 100,
         gold = 1000,
         levelId = 0,
-        bag = {
-            itemMap = {},
-            equipedIdList = {},
-            weaponMap = {},
-            maxCanEquipCount = 1,
-        },
-        gacha = {
-            itemMap = {}
-        },
-        ad = {
-            count = 0,
-            totalcount = 0,
-            lastadtime = 0
-        }
+    
     }
 end
 
